@@ -1,0 +1,5 @@
+spring.application.name: algorithm-trading
+
+coinone.api:
+  public-url: https://api.coinone.co.kr/public/v2
+  private-url: https://api.coinone.co.kr/v2.1/
