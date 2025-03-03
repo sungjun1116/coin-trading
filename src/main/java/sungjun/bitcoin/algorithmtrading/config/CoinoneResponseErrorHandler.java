@@ -2,11 +2,13 @@ package sungjun.bitcoin.algorithmtrading.config;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.ResponseErrorHandler;
 import sungjun.bitcoin.algorithmtrading.exception.CoinoneApiException;
 
 import java.io.IOException;
+import java.net.URI;
 
 public class CoinoneResponseErrorHandler implements ResponseErrorHandler {
 
@@ -21,7 +23,7 @@ public class CoinoneResponseErrorHandler implements ResponseErrorHandler {
     }
 
     @Override
-    public void handleError(ClientHttpResponse response) throws IOException {
+    public void handleError(URI url, HttpMethod method, ClientHttpResponse response) throws IOException {
         String responseBody = new String(response.getBody().readAllBytes());
         JsonNode jsonNode = mapper.readTree(responseBody);
         String errorCode = jsonNode.get("error_code").asText();
