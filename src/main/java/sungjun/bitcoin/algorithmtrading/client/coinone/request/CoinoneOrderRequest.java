@@ -61,7 +61,7 @@ public class CoinoneOrderRequest extends CoinonePrivateBaseRequest {
             .quoteCurrency(quoteCurrency)
             .targetCurrency(targetCurrency)
             .type(OrderType.MARKET)
-            .amount(qty)
+            .qty(qty)
             .limitPrice(limitPrice)
             .build();
     }
