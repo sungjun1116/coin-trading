@@ -1,10 +1,12 @@
 package sungjun.bitcoin.algorithmtrading.config.interceptor;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.stereotype.Component;
 import sungjun.bitcoin.algorithmtrading.util.SignatureUtils;
 
 import java.io.IOException;
@@ -14,13 +16,11 @@ import static sungjun.bitcoin.algorithmtrading.config.CoinoneProperties.X_COINON
 import static sungjun.bitcoin.algorithmtrading.config.CoinoneProperties.X_COINONE_SIGNATURE;
 
 @Slf4j
+@Component
 public class CoinoneAuthenticationInterceptor implements ClientHttpRequestInterceptor {
 
+    @Value("${coinone.api.secret-key}")
     private String secretKey;
-
-    public CoinoneAuthenticationInterceptor(String secretKey) {
-        this.secretKey = secretKey;
-    }
 
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {

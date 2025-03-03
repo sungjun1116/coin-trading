@@ -1,5 +1,6 @@
 package sungjun.bitcoin.algorithmtrading.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.http.client.ClientHttpRequestFactoryBuilder;
 import org.springframework.boot.http.client.ClientHttpRequestFactorySettings;
@@ -24,14 +25,15 @@ import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Configuration(proxyBeanMethods = false)
+@RequiredArgsConstructor
 @EnableConfigurationProperties(CoinoneProperties.class)
 public class RestClientConfig {
 
     private final CoinoneProperties coinoneProperties;
 
-    public RestClientConfig(CoinoneProperties coinoneProperties) {
-        this.coinoneProperties = coinoneProperties;
-    }
+    private final CoinoneAuthenticationInterceptor coinoneAuthenticationInterceptor;
+
+    private final LoggingInterceptor loggingInterceptor;
 
     @Bean
     public CoinoneTickerApiClient coinoneTickerApiClient(RestClient.Builder builder) {
@@ -39,7 +41,7 @@ public class RestClientConfig {
             .baseUrl(coinoneProperties.getPublicUrl())
             .requestFactory(createClientHttpRequestFactory())
             .defaultHeaders(this::setDefaultHeaders)
-            .requestInterceptors(interceptors -> interceptors.add(new LoggingInterceptor()))
+            .requestInterceptors(interceptors -> interceptors.add(loggingInterceptor))
             .defaultStatusHandler(new CoinoneResponseErrorHandler())
             .build();
 
@@ -53,8 +55,8 @@ public class RestClientConfig {
             .requestFactory(createClientHttpRequestFactory())
             .defaultHeaders(this::setDefaultHeaders)
             .requestInterceptors(interceptors -> {
-                interceptors.add(new CoinoneAuthenticationInterceptor(coinoneProperties.getSecretKey()));
-                interceptors.add(new LoggingInterceptor());
+                interceptors.add(coinoneAuthenticationInterceptor);
+                interceptors.add(loggingInterceptor);
             })
             .defaultStatusHandler(new CoinoneResponseErrorHandler())
             .build();
@@ -69,8 +71,8 @@ public class RestClientConfig {
             .requestFactory(createClientHttpRequestFactory())
             .defaultHeaders(this::setDefaultHeaders)
             .requestInterceptors(interceptors -> {
-                interceptors.add(new CoinoneAuthenticationInterceptor(coinoneProperties.getSecretKey()));
-                interceptors.add(new LoggingInterceptor());
+                interceptors.add(coinoneAuthenticationInterceptor);
+                interceptors.add(loggingInterceptor);
             })
             .defaultStatusHandler(new CoinoneResponseErrorHandler())
             .build();
