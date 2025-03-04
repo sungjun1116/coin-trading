@@ -4,7 +4,7 @@ spring:
 
 coinone.api:
   public-url: https://api.coinone.co.kr/public/v2
-  private-url: https://api.coinone.co.kr/v2.1/
+  private-url: https://api.coinone.co.kr/v2.1
   access-token: ${coinone-access-token}
   secret-key: ${coinone-secret-key}
   connection-timeout: 3000
