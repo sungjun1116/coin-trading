@@ -37,7 +37,8 @@ public final class CoinoneTiker {
         String quoteVolume,
         String targetVolume,
         List<BestOrderBook> bestAsks,
-        List<BestOrderBook> bestBids, String id
+        List<BestOrderBook> bestBids,
+        String id
     ) {
         this.quoteCurrency = quoteCurrency;
         this.targetCurrency = targetCurrency;
