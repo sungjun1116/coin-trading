@@ -3,8 +3,7 @@ package sungjun.bitcoin.algorithmtrading.client.coinone;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.test.context.SpringBootTest;
+import sungjun.bitcoin.algorithmtrading.client.IntegrationClientTestSupport;
 import sungjun.bitcoin.algorithmtrading.client.coinone.request.CoinoneAccountRequest;
 import sungjun.bitcoin.algorithmtrading.client.coinone.response.CoinoneAccountApiResponse;
 import sungjun.bitcoin.algorithmtrading.config.CoinoneProperties;
@@ -14,9 +13,7 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@EnableConfigurationProperties(CoinoneProperties.class)
-@SpringBootTest
-class CoinoneAccountApiClientTest {
+class CoinoneAccountApiClientTest extends IntegrationClientTestSupport {
 
     @Autowired
     CoinoneAccountApiClient coinoneAccountApiClient;

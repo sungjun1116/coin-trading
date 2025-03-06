@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.test.context.SpringBootTest;
+import sungjun.bitcoin.algorithmtrading.client.IntegrationClientTestSupport;
 import sungjun.bitcoin.algorithmtrading.client.coinone.request.CoinoneOrderCancleRequest;
 import sungjun.bitcoin.algorithmtrading.client.coinone.request.CoinoneOrderRequest;
 import sungjun.bitcoin.algorithmtrading.client.coinone.response.CoinoneOrderApiResponse;
@@ -17,9 +16,7 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@EnableConfigurationProperties(CoinoneProperties.class)
-@SpringBootTest
-class CoinoneOrderApiClientTest {
+class CoinoneOrderApiClientTest extends IntegrationClientTestSupport {
 
     @Autowired
     CoinoneOrderApiClient coinoneOrderApiClient;

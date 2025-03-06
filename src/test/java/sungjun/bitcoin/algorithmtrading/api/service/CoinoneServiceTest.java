@@ -3,15 +3,12 @@ package sungjun.bitcoin.algorithmtrading.api.service;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
+import sungjun.bitcoin.algorithmtrading.client.IntegrationClientTestSupport;
 import sungjun.bitcoin.algorithmtrading.client.coinone.CoinoneTiker;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Import(ClientTestConfiguration.class)
-@SpringBootTest
-class CoinoneServiceTest {
+class CoinoneServiceTest extends IntegrationClientTestSupport {
 
     @Autowired
     CoinoneService coinoneService;
