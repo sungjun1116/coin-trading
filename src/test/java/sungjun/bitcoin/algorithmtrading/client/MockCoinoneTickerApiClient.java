@@ -1,8 +1,8 @@
 package sungjun.bitcoin.algorithmtrading.client;
 
 import sungjun.bitcoin.algorithmtrading.client.coinone.CoinoneTickerApiClient;
-import sungjun.bitcoin.algorithmtrading.client.coinone.response.CoinoneTickerApiResponse;
 import sungjun.bitcoin.algorithmtrading.client.coinone.CoinoneTiker;
+import sungjun.bitcoin.algorithmtrading.client.coinone.response.CoinoneTickerApiResponse;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,8 +19,8 @@ public class MockCoinoneTickerApiClient implements CoinoneTickerApiClient {
 
     private List<CoinoneTiker> createTicker() {
         CoinoneTiker ticker = CoinoneTiker.builder()
-            .quoteCurrency("KRW")
-            .targetCurrency("BTC")
+            .quoteCurrency("krw")
+            .targetCurrency("btc")
             .build();
 
         return Collections.singletonList(ticker);
