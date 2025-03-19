@@ -11,7 +11,11 @@ import java.security.NoSuchAlgorithmException;
 @UtilityClass
 public class SignatureUtils {
 
-    public static String makeSignature(String secretKey, String encodedPayload) {
+    public static String makeSignature(String secretKey, String data) {
+        return makeSignature(secretKey, data.getBytes(StandardCharsets.UTF_8));
+    }
+
+    public static String makeSignature(String secretKey, byte[] data) {
         try {
             // Convert secret key to bytes using UTF-8
             byte[] secretKeyBytes = secretKey.getBytes(StandardCharsets.UTF_8);
@@ -22,7 +26,7 @@ public class SignatureUtils {
             mac.init(keySpec);
 
             // Generate signature
-            byte[] signature = mac.doFinal(encodedPayload.getBytes(StandardCharsets.UTF_8));
+            byte[] signature = mac.doFinal(data);
 
             // Convert to hexadecimal
             return bytesToHex(signature);
