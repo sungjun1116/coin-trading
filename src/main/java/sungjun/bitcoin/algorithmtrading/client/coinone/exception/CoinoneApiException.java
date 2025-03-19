@@ -1,4 +1,4 @@
-package sungjun.bitcoin.algorithmtrading.exception;
+package sungjun.bitcoin.algorithmtrading.client.coinone.exception;
 
 public class CoinoneApiException extends RuntimeException {
 

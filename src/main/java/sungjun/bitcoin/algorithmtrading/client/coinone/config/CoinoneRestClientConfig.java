@@ -1,4 +1,4 @@
-package sungjun.bitcoin.algorithmtrading.config;
+package sungjun.bitcoin.algorithmtrading.client.coinone.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -15,8 +15,8 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 import sungjun.bitcoin.algorithmtrading.client.coinone.CoinoneAccountApiClient;
 import sungjun.bitcoin.algorithmtrading.client.coinone.CoinoneOrderApiClient;
 import sungjun.bitcoin.algorithmtrading.client.coinone.CoinoneTickerApiClient;
-import sungjun.bitcoin.algorithmtrading.config.interceptor.CoinoneAuthenticationInterceptor;
-import sungjun.bitcoin.algorithmtrading.config.interceptor.LoggingInterceptor;
+import sungjun.bitcoin.algorithmtrading.client.coinone.interceptor.CoinoneAuthenticationInterceptor;
+import sungjun.bitcoin.algorithmtrading.client.interceptor.LoggingInterceptor;
 
 import java.time.Duration;
 
@@ -27,18 +27,18 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Configuration(proxyBeanMethods = false)
 @RequiredArgsConstructor
 @EnableConfigurationProperties(CoinoneProperties.class)
-public class RestClientConfig {
+public class CoinoneRestClientConfig {
 
-    private final CoinoneProperties coinoneProperties;
+    private final CoinoneProperties properties;
 
-    private final CoinoneAuthenticationInterceptor coinoneAuthenticationInterceptor;
+    private final CoinoneAuthenticationInterceptor authenticationInterceptor;
 
     private final LoggingInterceptor loggingInterceptor;
 
     @Bean
     public CoinoneTickerApiClient coinoneTickerApiClient(RestClient.Builder builder) {
         RestClient restClient = builder
-            .baseUrl(coinoneProperties.getPublicUrl())
+            .baseUrl(properties.getPublicUrl())
             .requestFactory(createClientHttpRequestFactory())
             .defaultHeaders(this::setDefaultHeaders)
             .requestInterceptors(interceptors -> interceptors.add(loggingInterceptor))
@@ -51,11 +51,11 @@ public class RestClientConfig {
     @Bean
     public CoinoneAccountApiClient coinoneAccountApiClient(RestClient.Builder builder) {
         RestClient restClient = builder
-            .baseUrl(coinoneProperties.getPrivateUrl())
+            .baseUrl(properties.getPrivateUrl())
             .requestFactory(createClientHttpRequestFactory())
             .defaultHeaders(this::setDefaultHeaders)
             .requestInterceptors(interceptors -> {
-                interceptors.add(coinoneAuthenticationInterceptor);
+                interceptors.add(authenticationInterceptor);
                 interceptors.add(loggingInterceptor);
             })
             .defaultStatusHandler(new CoinoneResponseErrorHandler())
@@ -67,11 +67,11 @@ public class RestClientConfig {
     @Bean
     public CoinoneOrderApiClient coinoneOrderApiClient(RestClient.Builder builder) {
         RestClient restClient = builder
-            .baseUrl(coinoneProperties.getPrivateUrl())
+            .baseUrl(properties.getPrivateUrl())
             .requestFactory(createClientHttpRequestFactory())
             .defaultHeaders(this::setDefaultHeaders)
             .requestInterceptors(interceptors -> {
-                interceptors.add(coinoneAuthenticationInterceptor);
+                interceptors.add(authenticationInterceptor);
                 interceptors.add(loggingInterceptor);
             })
             .defaultStatusHandler(new CoinoneResponseErrorHandler())
@@ -83,8 +83,8 @@ public class RestClientConfig {
     private ClientHttpRequestFactory createClientHttpRequestFactory() {
         ClientHttpRequestFactorySettings factorySettings = ClientHttpRequestFactorySettings
             .defaults()
-            .withConnectTimeout(Duration.ofSeconds(coinoneProperties.getConnectionTimeout()))
-            .withReadTimeout(Duration.ofSeconds(coinoneProperties.getReadTimeout()));
+            .withConnectTimeout(Duration.ofSeconds(properties.getConnectionTimeout()))
+            .withReadTimeout(Duration.ofSeconds(properties.getReadTimeout()));
 
         ClientHttpRequestFactory factory = ClientHttpRequestFactoryBuilder.detect().build(factorySettings);
         return new BufferingClientHttpRequestFactory(factory);

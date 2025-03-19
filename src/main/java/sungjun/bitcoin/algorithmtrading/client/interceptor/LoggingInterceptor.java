@@ -1,4 +1,4 @@
-package sungjun.bitcoin.algorithmtrading.config.interceptor;
+package sungjun.bitcoin.algorithmtrading.client.interceptor;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpRequest;
@@ -51,7 +51,7 @@ public class LoggingInterceptor implements ClientHttpRequestInterceptor {
         log.info("Status code  : {}", response.getStatusCode());
         log.info("Status text  : {}", response.getStatusText());
         log.info("Headers      : {}", response.getHeaders());
-        log.info("Response body: {}", inputStringBuilder.toString());
+        log.info("Response body: {}", inputStringBuilder);
         log.info("=======================response end=================================================");
     }
 }

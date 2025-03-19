@@ -1,4 +1,4 @@
-package sungjun.bitcoin.algorithmtrading.config;
+package sungjun.bitcoin.algorithmtrading.client.coinone.config;
 
 import lombok.Getter;
 import org.springframework.boot.context.properties.ConfigurationProperties;

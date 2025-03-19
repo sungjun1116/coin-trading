@@ -6,10 +6,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import sungjun.bitcoin.algorithmtrading.client.IntegrationClientTestSupport;
+import sungjun.bitcoin.algorithmtrading.client.coinone.config.CoinoneProperties;
 import sungjun.bitcoin.algorithmtrading.client.coinone.request.CoinoneOrderCancleRequest;
 import sungjun.bitcoin.algorithmtrading.client.coinone.request.CoinoneOrderRequest;
 import sungjun.bitcoin.algorithmtrading.client.coinone.response.CoinoneOrderApiResponse;
-import sungjun.bitcoin.algorithmtrading.config.CoinoneProperties;
 
 import java.math.BigDecimal;
 import java.util.UUID;
