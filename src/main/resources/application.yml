@@ -9,5 +9,6 @@ coinone.api:
   secret-key: ${coinone-secret-key}
   connection-timeout: 3000
   read-timeout: 5000
+  signature-algorithm: HmacSHA512
 
 

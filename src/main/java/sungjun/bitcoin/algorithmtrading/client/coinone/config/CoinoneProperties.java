@@ -23,13 +23,16 @@ public class CoinoneProperties {
 
     private Long readTimeout;
 
+    private String signatureAlgorithm;
+
     @ConstructorBinding
-    public CoinoneProperties(String publicUrl, String privateUrl, String accessToken, String secretKey, Long connectionTimeout, Long readTimeout) {
+    public CoinoneProperties(String publicUrl, String privateUrl, String accessToken, String secretKey, Long connectionTimeout, Long readTimeout, String signatureAlgorithm) {
         this.publicUrl = publicUrl;
         this.privateUrl = privateUrl;
         this.accessToken = accessToken;
         this.secretKey = secretKey;
         this.connectionTimeout = connectionTimeout;
         this.readTimeout = readTimeout;
+        this.signatureAlgorithm = signatureAlgorithm;
     }
 }
