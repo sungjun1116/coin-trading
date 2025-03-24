@@ -24,7 +24,7 @@ public class CoinoneAuthenticationInterceptor implements ClientHttpRequestInterc
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
         String encodedPayload = Base64.getEncoder().encodeToString(body);
-        String signature = SignatureUtils.makeSignature(properties.getSecretKey(), encodedPayload);
+        String signature = SignatureUtils.makeSignature(properties.getSecretKey(), encodedPayload, "HmacSHA512");
         request.getHeaders().add(X_COINONE_PAYLOD, encodedPayload);
         request.getHeaders().add(X_COINONE_SIGNATURE, signature);
 

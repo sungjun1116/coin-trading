@@ -11,18 +11,18 @@ import java.security.NoSuchAlgorithmException;
 @UtilityClass
 public class SignatureUtils {
 
-    public static String makeSignature(String secretKey, String data) {
-        return makeSignature(secretKey, data.getBytes(StandardCharsets.UTF_8));
+    public static String makeSignature(String secretKey, String data, String algorithm) {
+        return makeSignature(secretKey, data.getBytes(StandardCharsets.UTF_8), algorithm);
     }
 
-    public static String makeSignature(String secretKey, byte[] data) {
+    public static String makeSignature(String secretKey, byte[] data, String algorithm) {
         try {
             // Convert secret key to bytes using UTF-8
             byte[] secretKeyBytes = secretKey.getBytes(StandardCharsets.UTF_8);
 
             // Create MAC instance with HmacSHA512
-            Mac mac = Mac.getInstance("HmacSHA512");
-            SecretKeySpec keySpec = new SecretKeySpec(secretKeyBytes, "HmacSHA512");
+            Mac mac = Mac.getInstance(algorithm);
+            SecretKeySpec keySpec = new SecretKeySpec(secretKeyBytes, algorithm);
             mac.init(keySpec);
 
             // Generate signature
