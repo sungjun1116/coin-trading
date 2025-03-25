@@ -11,4 +11,12 @@ coinone.api:
   read-timeout: 5000
   signature-algorithm: HmacSHA512
 
+binance.api:
+  url: https://api.binance.com
+  access-token: ${binance-access-token}
+  secret-key: ${binance-secret-key}
+  connection-timeout: 3000
+  read-timeout: 5000
+  signature-algorithm: HmacSHA256
+
 
