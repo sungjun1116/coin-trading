@@ -30,10 +30,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class CoinoneRestClientConfig {
 
     private final CoinoneProperties properties;
-
     private final CoinoneAuthenticationInterceptor authenticationInterceptor;
-
     private final LoggingInterceptor loggingInterceptor;
+    private final CoinoneResponseErrorHandler responseErrorHandler;
 
     @Bean
     public CoinoneTickerApiClient coinoneTickerApiClient(RestClient.Builder builder) {
@@ -42,7 +41,7 @@ public class CoinoneRestClientConfig {
             .requestFactory(createClientHttpRequestFactory())
             .defaultHeaders(this::setDefaultHeaders)
             .requestInterceptors(interceptors -> interceptors.add(loggingInterceptor))
-            .defaultStatusHandler(new CoinoneResponseErrorHandler())
+            .defaultStatusHandler(responseErrorHandler)
             .build();
 
         return createHttpServiceProxy(restClient, CoinoneTickerApiClient.class);
@@ -58,7 +57,7 @@ public class CoinoneRestClientConfig {
                 interceptors.add(authenticationInterceptor);
                 interceptors.add(loggingInterceptor);
             })
-            .defaultStatusHandler(new CoinoneResponseErrorHandler())
+            .defaultStatusHandler(responseErrorHandler)
             .build();
 
         return createHttpServiceProxy(restClient, CoinoneAccountApiClient.class);
@@ -74,7 +73,7 @@ public class CoinoneRestClientConfig {
                 interceptors.add(authenticationInterceptor);
                 interceptors.add(loggingInterceptor);
             })
-            .defaultStatusHandler(new CoinoneResponseErrorHandler())
+            .defaultStatusHandler(responseErrorHandler)
             .build();
 
         return createHttpServiceProxy(restClient, CoinoneOrderApiClient.class);
