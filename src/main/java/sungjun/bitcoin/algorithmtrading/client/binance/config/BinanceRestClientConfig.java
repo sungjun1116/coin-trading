@@ -30,6 +30,7 @@ public class BinanceRestClientConfig {
     private final BinanceProperties properties;
     private final BinanceAuthenticationInterceptor authenticationInterceptor;
     private final LoggingInterceptor loggingInterceptor;
+    private final BinanceResponseErrorHandler responseErrorHandler;
 
     @Bean
     public BinanceAccountApiClient binanceAccountApiClient(RestClient.Builder builder) {
@@ -41,6 +42,7 @@ public class BinanceRestClientConfig {
                 interceptors.add(authenticationInterceptor);
                 interceptors.add(loggingInterceptor);
             })
+            .defaultStatusHandler(responseErrorHandler)
             .build();
 
         return createHttpServiceProxy(restClient, BinanceAccountApiClient.class);
