@@ -1,5 +1,8 @@
 package sungjun.bitcoin.algorithmtrading.client.coinone.exception;
 
+import lombok.Getter;
+
+@Getter
 public class CoinoneApiException extends RuntimeException {
 
     private String errorCode;
