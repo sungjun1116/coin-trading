@@ -8,10 +8,10 @@ import lombok.Getter;
 @Getter
 public class BinanceApiException extends RuntimeException {
 
-    private final String errorCode;
+    private final int errorCode;
     private final String errorMessage;
 
-    public BinanceApiException(String errorCode, String errorMessage) {
+    public BinanceApiException(int errorCode, String errorMessage) {
         super(String.format("Binance API Error: [%s] %s", errorCode, errorMessage));
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;

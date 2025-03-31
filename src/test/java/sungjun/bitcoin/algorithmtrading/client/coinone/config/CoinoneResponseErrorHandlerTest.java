@@ -125,7 +125,7 @@ class CoinoneResponseErrorHandlerTest {
 
     @Test
     @DisplayName("에러 응답을 올바르게 CoinoneApiException으로 변환해야 함")
-    void handleError_shouldThrowCoinoneApiException_withCorrectErrorInfo() throws IOException {
+    void handleError_shouldThrowCoinoneApiException_withCorrectErrorInfo() {
         // given
         String errorResponse = "{\"result\":\"error\",\"error_code\":\"100\",\"error_msg\":\"잘못된 API 키\"}";
         ClientHttpResponse response = new MockClientHttpResponse(
@@ -142,7 +142,7 @@ class CoinoneResponseErrorHandlerTest {
 
     @Test
     @DisplayName("JSON 파싱 에러 발생 시 적절한 예외를 발생시켜야 함")
-    void handleError_shouldHandleParsingErrors() throws IOException {
+    void handleError_shouldHandleParsingErrors() {
         // given
         String invalidJson = "{invalid json}";
         ClientHttpResponse response = new MockClientHttpResponse(

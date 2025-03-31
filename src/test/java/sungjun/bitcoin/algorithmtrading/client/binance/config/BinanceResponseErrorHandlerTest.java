@@ -109,7 +109,7 @@ class BinanceResponseErrorHandlerTest {
 
     @Test
     @DisplayName("에러 응답을 올바르게 BinanceApiException으로 변환해야 함")
-    void handleError_shouldThrowBinanceApiException_withCorrectErrorInfo() throws IOException {
+    void handleError_shouldThrowBinanceApiException_withCorrectErrorInfo() {
         // given
         String errorResponse = "{\"code\":-1121,\"msg\":\"Invalid symbol.\"}";
         ClientHttpResponse response = new MockClientHttpResponse(
@@ -120,14 +120,14 @@ class BinanceResponseErrorHandlerTest {
         BinanceApiException exception = assertThrows(BinanceApiException.class, () ->
                 errorHandler.handleError(uri, HttpMethod.GET, response));
 
-        assertEquals("-1121", exception.getErrorCode());
+        assertEquals(-1121, exception.getErrorCode());
         assertEquals("Invalid symbol.", exception.getErrorMessage());
         assertEquals("Binance API Error: [-1121] Invalid symbol.", exception.getMessage());
     }
 
     @Test
     @DisplayName("JSON 파싱 에러 발생 시 적절한 예외를 발생시켜야 함")
-    void handleError_shouldHandleParsingErrors() throws IOException {
+    void handleError_shouldHandleParsingErrors() {
         // given
         String invalidJson = "{invalid json}";
         ClientHttpResponse response = new MockClientHttpResponse(
@@ -138,7 +138,7 @@ class BinanceResponseErrorHandlerTest {
         BinanceApiException exception = assertThrows(BinanceApiException.class, () ->
                 errorHandler.handleError(uri, HttpMethod.GET, response));
 
-        assertEquals("400", exception.getErrorCode());
+        assertEquals(400, exception.getErrorCode());
         assertTrue(exception.getErrorMessage().contains("Failed to parse error response"));
     }
 }
