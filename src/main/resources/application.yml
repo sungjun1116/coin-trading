@@ -5,16 +5,16 @@ spring:
 coinone.api:
   public-url: https://api.coinone.co.kr/public/v2
   private-url: https://api.coinone.co.kr/v2.1
-  access-token: ${coinone-access-token}
-  secret-key: ${coinone-secret-key}
+  access-token: ${COINONE_ACCESS_TOKEN}
+  secret-key: ${COINONE_SECRET_KEY}
   connection-timeout: 3000
   read-timeout: 5000
   signature-algorithm: HmacSHA512
 
 binance.api:
   url: https://api.binance.com
-  access-token: ${binance-access-token}
-  secret-key: ${binance-secret-key}
+  access-token: ${BINANCE_ACCESS_TOKEN}
+  secret-key: ${BINANCE_SECRET_KEY}
   connection-timeout: 3000
   read-timeout: 5000
   signature-algorithm: HmacSHA256
