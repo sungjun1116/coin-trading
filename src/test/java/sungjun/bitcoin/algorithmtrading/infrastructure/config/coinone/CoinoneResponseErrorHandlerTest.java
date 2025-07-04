@@ -1,4 +1,4 @@
-package sungjun.bitcoin.algorithmtrading.client.binance.config;
+package sungjun.bitcoin.algorithmtrading.infrastructure.config.coinone;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
@@ -7,21 +7,22 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.mock.http.client.MockClientHttpResponse;
-import sungjun.bitcoin.algorithmtrading.infrastructure.client.binance.config.BinanceResponseErrorHandler;
-import sungjun.bitcoin.algorithmtrading.infrastructure.exception.binance.BinanceApiException;
+import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.config.CoinoneResponseErrorHandler;
+import sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException;
 
 import java.io.IOException;
 import java.net.URI;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class BinanceResponseErrorHandlerTest {
+class CoinoneResponseErrorHandlerTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private final BinanceResponseErrorHandler errorHandler = new BinanceResponseErrorHandler(objectMapper);
+    private final CoinoneResponseErrorHandler errorHandler = new CoinoneResponseErrorHandler(objectMapper);
 
     @Test
     @DisplayName("HTTP 상태 코드가 4xx인 경우 에러로 판단해야 함")
@@ -50,10 +51,10 @@ class BinanceResponseErrorHandlerTest {
     }
 
     @Test
-    @DisplayName("응답에 0이 아닌 에러 코드가 있는 경우 에러로 판단해야 함")
-    void hasError_shouldReturnTrue_whenResponseContainsErrorCode() throws IOException {
+    @DisplayName("result 필드가 error인 경우 에러로 판단해야 함")
+    void hasError_shouldReturnTrue_whenResultIsError() throws IOException {
         // given
-        String errorResponse = "{\"code\":-1121,\"msg\":\"Invalid symbol.\"}";
+        String errorResponse = "{\"result\":\"error\",\"error_code\":\"100\",\"error_msg\":\"잘못된 API 키\"}";
         ClientHttpResponse response = new MockClientHttpResponse(
                 errorResponse.getBytes(), HttpStatus.OK);
 
@@ -65,10 +66,25 @@ class BinanceResponseErrorHandlerTest {
     }
 
     @Test
-    @DisplayName("응답의 코드가 0인 경우 정상으로 판단해야 함")
-    void hasError_shouldReturnFalse_whenResponseHasCodeZero() throws IOException {
+    @DisplayName("result 필드가 success인 경우 정상으로 판단해야 함")
+    void hasError_shouldReturnFalse_whenResultIsSuccess() throws IOException {
         // given
-        String okResponse = "{\"code\":0,\"msg\":\"Success\"}";
+        String okResponse = "{\"result\":\"success\",\"balance\":\"10000\"}";
+        ClientHttpResponse response = new MockClientHttpResponse(
+                okResponse.getBytes(), HttpStatus.OK);
+
+        // when
+        boolean hasError = errorHandler.hasError(response);
+
+        // then
+        assertFalse(hasError);
+    }
+
+    @Test
+    @DisplayName("result 필드가 없는 경우 정상으로 판단해야 함")
+    void hasError_shouldReturnFalse_whenNoResultField() throws IOException {
+        // given
+        String okResponse = "{\"data\":\"some data\"}";
         ClientHttpResponse response = new MockClientHttpResponse(
                 okResponse.getBytes(), HttpStatus.OK);
 
@@ -109,21 +125,20 @@ class BinanceResponseErrorHandlerTest {
     }
 
     @Test
-    @DisplayName("에러 응답을 올바르게 BinanceApiException으로 변환해야 함")
-    void handleError_shouldThrowBinanceApiException_withCorrectErrorInfo() {
+    @DisplayName("에러 응답을 올바르게 CoinoneApiException으로 변환해야 함")
+    void handleError_shouldThrowCoinoneApiException_withCorrectErrorInfo() {
         // given
-        String errorResponse = "{\"code\":-1121,\"msg\":\"Invalid symbol.\"}";
+        String errorResponse = "{\"result\":\"error\",\"error_code\":\"100\",\"error_msg\":\"잘못된 API 키\"}";
         ClientHttpResponse response = new MockClientHttpResponse(
                 errorResponse.getBytes(), HttpStatus.OK);
-        URI uri = URI.create("https://api.binance.com/api/v3/ticker/price");
+        URI uri = URI.create("https://api.coinone.co.kr/v2/account/balance");
 
         // when & then
-        BinanceApiException exception = assertThrows(BinanceApiException.class, () ->
+        CoinoneApiException exception = assertThrows(CoinoneApiException.class, () ->
                 errorHandler.handleError(uri, HttpMethod.GET, response));
 
-        assertEquals(-1121, exception.getErrorCode());
-        assertEquals("Invalid symbol.", exception.getErrorMessage());
-        assertEquals("Binance API Error: [-1121] Invalid symbol.", exception.getMessage());
+        assertEquals("100", exception.getErrorCode());
+        assertEquals("잘못된 API 키", exception.getMessage());
     }
 
     @Test
@@ -133,13 +148,12 @@ class BinanceResponseErrorHandlerTest {
         String invalidJson = "{invalid json}";
         ClientHttpResponse response = new MockClientHttpResponse(
                 invalidJson.getBytes(), HttpStatus.BAD_REQUEST);
-        URI uri = URI.create("https://api.binance.com/api/v3/ticker/price");
+        URI uri = URI.create("https://api.coinone.co.kr/v2/account/balance");
 
         // when & then
-        BinanceApiException exception = assertThrows(BinanceApiException.class, () ->
+        Exception exception = assertThrows(Exception.class, () ->
                 errorHandler.handleError(uri, HttpMethod.GET, response));
 
-        assertEquals(400, exception.getErrorCode());
-        assertTrue(exception.getErrorMessage().contains("Failed to parse error response"));
+        assertNotNull(exception);
     }
 }

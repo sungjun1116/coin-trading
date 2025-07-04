@@ -1,9 +1,9 @@
-package sungjun.bitcoin.algorithmtrading.client.binance;
+package sungjun.bitcoin.algorithmtrading.infrastructure.client.binance;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import sungjun.bitcoin.algorithmtrading.client.IntegrationClientTestSupport;
+import sungjun.bitcoin.algorithmtrading.infrastructure.client.IntegrationClientTestSupport;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.binance.BinanceAccountApiClient;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.binance.response.BinanceAccountApiResponse;
 

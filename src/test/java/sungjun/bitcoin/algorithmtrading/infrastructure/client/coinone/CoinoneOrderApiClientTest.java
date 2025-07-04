@@ -1,11 +1,11 @@
-package sungjun.bitcoin.algorithmtrading.client.coinone;
+package sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import sungjun.bitcoin.algorithmtrading.client.IntegrationClientTestSupport;
+import sungjun.bitcoin.algorithmtrading.infrastructure.client.IntegrationClientTestSupport;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.CoinoneOrderApiClient;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.OrderSide;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.request.CoinoneOrderCancelRequest;
@@ -27,7 +27,7 @@ class CoinoneOrderApiClientTest extends IntegrationClientTestSupport {
 
     @AfterEach
     void tearDown() {
-        // coinoneOrderApiClient.cancelAll(createOrderCancleRequest());
+        // coinoneOrderApiClient.cancelAll(createOrderCancelRequest());
     }
 
     @DisplayName("시장가 매도 주문을 체결한다.")
@@ -143,7 +143,7 @@ class CoinoneOrderApiClientTest extends IntegrationClientTestSupport {
         assertThat(response).isNotNull();
     }
 
-    private CoinoneOrderCancelRequest createOrderCancleRequest() {
+    private CoinoneOrderCancelRequest createOrderCancelRequest() {
         return CoinoneOrderCancelRequest.builder()
             .accessToken(coinoneProperties.getAccessToken())
             .nonce(UUID.randomUUID().toString())

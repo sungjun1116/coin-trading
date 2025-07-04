@@ -1,4 +1,4 @@
-package sungjun.bitcoin.algorithmtrading.client;
+package sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone;
 
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.CoinoneTickerApiClient;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.CoinoneTiker;

@@ -1,4 +1,4 @@
-package sungjun.bitcoin.algorithmtrading.client;
+package sungjun.bitcoin.algorithmtrading.infrastructure.client;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
