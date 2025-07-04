@@ -12,6 +12,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * HTTP 요청과 응답을 로그로 기록하는 인터셉터입니다.
+ * <p>
+ * 모든 외부 API 호출에 대해 요청 URL, 메서드, 헤더, 본문과
+ * 응답 상태 코드, 헤더, 본문을 상세하게 로그로 기록합니다.
+ * 디버깅 및 문제 해결에 유용합니다.
+ * </p>
+ *
+ * @author sungjun
+ * @since 1.0
+ */
 @Slf4j
 @Component
 public class LoggingInterceptor implements ClientHttpRequestInterceptor {

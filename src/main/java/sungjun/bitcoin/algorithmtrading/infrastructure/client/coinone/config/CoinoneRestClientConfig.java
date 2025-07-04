@@ -24,6 +24,23 @@ import static org.springframework.http.HttpHeaders.ACCEPT;
 import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+/**
+ * Coinone API 클라이언트 설정 클래스입니다.
+ * <p>
+ * Coinone 거래소와의 통신을 위한 RestClient 및 HTTP Service Proxy를 설정합니다.
+ * 공개 API와 비공개 API를 위한 별도의 클라이언트를 생성합니다.
+ * </p>
+ *
+ * <h2>주요 기능</h2>
+ * <ul>
+ *   <li>Ticker API 클라이언트 (공개 API)</li>
+ *   <li>Account API 클라이언트 (비공개 API, 인증 필요)</li>
+ *   <li>Order API 클라이언트 (비공개 API, 인증 필요)</li>
+ * </ul>
+ *
+ * @author sungjun
+ * @since 1.0
+ */
 @Configuration(proxyBeanMethods = false)
 @RequiredArgsConstructor
 @EnableConfigurationProperties(CoinoneProperties.class)
