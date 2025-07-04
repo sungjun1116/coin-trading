@@ -1,8 +1,8 @@
 package sungjun.bitcoin.algorithmtrading.client;
 
-import sungjun.bitcoin.algorithmtrading.client.coinone.CoinoneTickerApiClient;
-import sungjun.bitcoin.algorithmtrading.client.coinone.CoinoneTiker;
-import sungjun.bitcoin.algorithmtrading.client.coinone.response.CoinoneTickerApiResponse;
+import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.CoinoneTickerApiClient;
+import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.CoinoneTiker;
+import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.response.CoinoneTickerApiResponse;
 
 import java.util.Collections;
 import java.util.List;

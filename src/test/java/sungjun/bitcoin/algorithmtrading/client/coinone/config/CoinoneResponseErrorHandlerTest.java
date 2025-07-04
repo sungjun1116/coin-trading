@@ -7,7 +7,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.mock.http.client.MockClientHttpResponse;
-import sungjun.bitcoin.algorithmtrading.client.coinone.exception.CoinoneApiException;
+import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.config.CoinoneResponseErrorHandler;
+import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.exception.CoinoneApiException;
 
 import java.io.IOException;
 import java.net.URI;

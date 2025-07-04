@@ -6,10 +6,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import sungjun.bitcoin.algorithmtrading.client.IntegrationClientTestSupport;
-import sungjun.bitcoin.algorithmtrading.client.coinone.config.CoinoneProperties;
-import sungjun.bitcoin.algorithmtrading.client.coinone.request.CoinoneOrderCancleRequest;
-import sungjun.bitcoin.algorithmtrading.client.coinone.request.CoinoneOrderRequest;
-import sungjun.bitcoin.algorithmtrading.client.coinone.response.CoinoneOrderApiResponse;
+import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.CoinoneOrderApiClient;
+import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.OrderSide;
+import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.config.CoinoneProperties;
+import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.request.CoinoneOrderCancleRequest;
+import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.request.CoinoneOrderRequest;
+import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.response.CoinoneOrderApiResponse;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -59,7 +61,7 @@ class CoinoneOrderApiClientTest extends IntegrationClientTestSupport {
 
 
     @DisplayName("지정가 매도 주문을 체결한다.")
-    @Disabled
+    // @Disabled
     @Test
     void limitSellOrder() {
         // given
@@ -68,8 +70,8 @@ class CoinoneOrderApiClientTest extends IntegrationClientTestSupport {
         OrderSide side = OrderSide.SELL;
         String quoteCurrency = "KRW";
         String targetCurrency = "BTC";
-        String price = String.valueOf(132860000);
-        String qty = new BigDecimal("0.0332").toString();
+        String price = String.valueOf(146530000);
+        String qty = new BigDecimal("0.01055689").toString();
         CoinoneOrderRequest limitOrderRequest = CoinoneOrderRequest.createLimitOrder(accessToken,
             nonce,
             side,

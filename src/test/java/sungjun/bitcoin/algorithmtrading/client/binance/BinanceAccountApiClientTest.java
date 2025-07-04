@@ -4,7 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import sungjun.bitcoin.algorithmtrading.client.IntegrationClientTestSupport;
-import sungjun.bitcoin.algorithmtrading.client.binance.response.BinanceAccountApiResponse;
+import sungjun.bitcoin.algorithmtrading.infrastructure.client.binance.BinanceAccountApiClient;
+import sungjun.bitcoin.algorithmtrading.infrastructure.client.binance.response.BinanceAccountApiResponse;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
