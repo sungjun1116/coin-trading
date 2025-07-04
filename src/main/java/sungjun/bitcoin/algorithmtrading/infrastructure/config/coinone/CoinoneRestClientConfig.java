@@ -1,4 +1,4 @@
-package sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.config;
+package sungjun.bitcoin.algorithmtrading.infrastructure.config.coinone;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -15,8 +15,8 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.CoinoneAccountApiClient;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.CoinoneOrderApiClient;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.CoinoneTickerApiClient;
-import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.interceptor.CoinoneAuthenticationInterceptor;
-import sungjun.bitcoin.algorithmtrading.infrastructure.client.interceptor.LoggingInterceptor;
+import sungjun.bitcoin.algorithmtrading.infrastructure.interceptor.coinone.CoinoneAuthenticationInterceptor;
+import sungjun.bitcoin.algorithmtrading.infrastructure.interceptor.common.LoggingInterceptor;
 
 import java.time.Duration;
 

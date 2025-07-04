@@ -1,4 +1,4 @@
-package sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.interceptor;
+package sungjun.bitcoin.algorithmtrading.infrastructure.interceptor.coinone;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpRequest;
@@ -6,14 +6,14 @@ import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
-import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.config.CoinoneProperties;
+import sungjun.bitcoin.algorithmtrading.infrastructure.config.coinone.CoinoneProperties;
 import sungjun.bitcoin.algorithmtrading.util.SignatureUtils;
 
 import java.io.IOException;
 import java.util.Base64;
 
-import static sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.config.CoinoneProperties.X_COINONE_PAYLOD;
-import static sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.config.CoinoneProperties.X_COINONE_SIGNATURE;
+import static sungjun.bitcoin.algorithmtrading.infrastructure.config.coinone.CoinoneProperties.X_COINONE_PAYLOAD;
+import static sungjun.bitcoin.algorithmtrading.infrastructure.config.coinone.CoinoneProperties.X_COINONE_SIGNATURE;
 
 /**
  * Coinone API 인증을 처리하는 HTTP 요청 인터셉터입니다.
@@ -36,7 +36,7 @@ public class CoinoneAuthenticationInterceptor implements ClientHttpRequestInterc
     public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
         String encodedPayload = Base64.getEncoder().encodeToString(body);
         String signature = SignatureUtils.makeSignature(properties.getSecretKey(), encodedPayload, properties.getSignatureAlgorithm());
-        request.getHeaders().add(X_COINONE_PAYLOD, encodedPayload);
+        request.getHeaders().add(X_COINONE_PAYLOAD, encodedPayload);
         request.getHeaders().add(X_COINONE_SIGNATURE, signature);
 
         return execution.execute(request, body);

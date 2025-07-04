@@ -1,4 +1,4 @@
-package sungjun.bitcoin.algorithmtrading.infrastructure.client.interceptor;
+package sungjun.bitcoin.algorithmtrading.infrastructure.interceptor.common;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpRequest;

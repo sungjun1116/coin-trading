@@ -1,4 +1,4 @@
-package sungjun.bitcoin.algorithmtrading.infrastructure.client.binance.config;
+package sungjun.bitcoin.algorithmtrading.infrastructure.config.binance;
 
 import lombok.Getter;
 import org.springframework.boot.context.properties.ConfigurationProperties;

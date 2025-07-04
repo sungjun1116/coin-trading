@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.service.annotation.PostExchange;
-import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.request.CoinoneOrderCancleRequest;
+import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.request.CoinoneOrderCancelRequest;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.request.CoinoneOrderRequest;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.response.CoinoneOrderApiResponse;
 
@@ -34,7 +34,7 @@ public interface CoinoneOrderApiClient {
      *
      * @param request 주문 생성 요청 데이터
      * @return {@link CoinoneOrderApiResponse} 주문 결과 응답
-     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.exception.CoinoneApiException API 호출 실패 시
+     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException API 호출 실패 시
      */
     @PostExchange("/order")
     CoinoneOrderApiResponse order(@RequestBody CoinoneOrderRequest request);
@@ -48,9 +48,9 @@ public interface CoinoneOrderApiClient {
      *
      * @param request 주문 취소 요청 데이터
      * @return {@code Map<String, String>} 취소 결과 정보
-     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.exception.CoinoneApiException API 호출 실패 시
+     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException API 호출 실패 시
      */
     @PostExchange("/order/cancel/all")
-    Map<String, String> cancelAll(@RequestBody CoinoneOrderCancleRequest request);
+    Map<String, String> cancelAll(@RequestBody CoinoneOrderCancelRequest request);
 
 }

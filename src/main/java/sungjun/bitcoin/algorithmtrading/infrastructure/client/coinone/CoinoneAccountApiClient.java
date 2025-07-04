@@ -30,7 +30,7 @@ public interface CoinoneAccountApiClient {
      *
      * @param requestBody 계정 조회 요청 데이터
      * @return {@link CoinoneAccountApiResponse} 계정 정보 응답
-     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.exception.CoinoneApiException API 호출 실패 시
+     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException API 호출 실패 시
      */
     @PostExchange("/account/balance")
     CoinoneAccountApiResponse getAccount(@RequestBody CoinoneAccountRequest requestBody);
@@ -43,7 +43,7 @@ public interface CoinoneAccountApiClient {
      *
      * @param requestBody 계정 조회 요청 데이터
      * @return {@link CoinoneAccountApiResponse} 전체 계정 정보 응답
-     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.exception.CoinoneApiException API 호출 실패 시
+     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException API 호출 실패 시
      */
     @PostExchange("/account/balance/all")
     CoinoneAccountApiResponse getAccounts(@RequestBody CoinoneAccountRequest requestBody);

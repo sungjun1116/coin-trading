@@ -1,4 +1,4 @@
-package sungjun.bitcoin.algorithmtrading.infrastructure.client.binance.config;
+package sungjun.bitcoin.algorithmtrading.infrastructure.config.binance;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import sungjun.bitcoin.algorithmtrading.client.IntegrationClientTestSupport;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.CoinoneAccountApiClient;
-import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.config.CoinoneProperties;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.request.CoinoneAccountRequest;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.response.CoinoneAccountApiResponse;
+import sungjun.bitcoin.algorithmtrading.infrastructure.config.coinone.CoinoneProperties;
 
 import java.util.List;
 import java.util.UUID;

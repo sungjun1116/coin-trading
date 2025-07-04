@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import sungjun.bitcoin.algorithmtrading.client.IntegrationClientTestSupport;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.CoinoneOrderApiClient;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.OrderSide;
-import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.config.CoinoneProperties;
-import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.request.CoinoneOrderCancleRequest;
+import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.request.CoinoneOrderCancelRequest;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.request.CoinoneOrderRequest;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.response.CoinoneOrderApiResponse;
 
@@ -24,7 +23,7 @@ class CoinoneOrderApiClientTest extends IntegrationClientTestSupport {
     CoinoneOrderApiClient coinoneOrderApiClient;
 
     @Autowired
-    CoinoneProperties coinoneProperties;
+    sungjun.bitcoin.algorithmtrading.infrastructure.config.coinone.CoinoneProperties coinoneProperties;
 
     @AfterEach
     void tearDown() {
@@ -144,8 +143,8 @@ class CoinoneOrderApiClientTest extends IntegrationClientTestSupport {
         assertThat(response).isNotNull();
     }
 
-    private CoinoneOrderCancleRequest createOrderCancleRequest() {
-        return CoinoneOrderCancleRequest.builder()
+    private CoinoneOrderCancelRequest createOrderCancleRequest() {
+        return CoinoneOrderCancelRequest.builder()
             .accessToken(coinoneProperties.getAccessToken())
             .nonce(UUID.randomUUID().toString())
             .quoteCurrency("KRW")

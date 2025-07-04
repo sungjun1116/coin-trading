@@ -2,8 +2,8 @@ package sungjun.bitcoin.algorithmtrading.service;
 
 import org.springframework.stereotype.Service;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.CoinoneTickerApiClient;
-import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.response.CoinoneTickerApiResponse;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.CoinoneTiker;
+import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.response.CoinoneTickerApiResponse;
 
 /**
  * Coinone 거래소와 관련된 비즈니스 로직을 처리하는 서비스 클래스입니다.
@@ -38,7 +38,7 @@ public class CoinoneService {
      * @param quoteCurrency 기준 통화 (예: KRW)
      * @param targetCurrency 대상 통화 (예: BTC)
      * @return {@link CoinoneTiker} 시세 정보 객체
-     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.exception.CoinoneApiException API 호출 실패 시
+     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException API 호출 실패 시
      */
     public CoinoneTiker getTicker(String quoteCurrency, String targetCurrency) {
         CoinoneTickerApiResponse apiResponse = coinoneTickerApiClient.getTicker(quoteCurrency, targetCurrency);

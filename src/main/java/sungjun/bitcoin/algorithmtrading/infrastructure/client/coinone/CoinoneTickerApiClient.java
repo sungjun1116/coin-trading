@@ -29,7 +29,7 @@ public interface CoinoneTickerApiClient {
      * @param quoteCurrency 기준 통화 코드 (예: KRW)
      * @param targetCurrency 대상 통화 코드 (예: BTC)
      * @return {@link CoinoneTickerApiResponse} 시세 정보 응답
-     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.exception.CoinoneApiException API 호출 실패 시
+     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException API 호출 실패 시
      */
     @GetExchange("/ticker_new/{quoteCurrency}/{targetCurrency}")
     CoinoneTickerApiResponse getTicker(@PathVariable String quoteCurrency, @PathVariable String targetCurrency);

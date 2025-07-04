@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.mock.http.client.MockClientHttpResponse;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.binance.config.BinanceResponseErrorHandler;
-import sungjun.bitcoin.algorithmtrading.infrastructure.client.binance.exception.BinanceApiException;
+import sungjun.bitcoin.algorithmtrading.infrastructure.exception.binance.BinanceApiException;
 
 import java.io.IOException;
 import java.net.URI;

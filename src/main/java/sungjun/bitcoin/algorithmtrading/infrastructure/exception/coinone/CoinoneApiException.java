@@ -1,4 +1,4 @@
-package sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.exception;
+package sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone;
 
 import lombok.Getter;
 
@@ -29,7 +29,7 @@ import lombok.Getter;
  * <p>더 자세한 에러 코드 정보는 <a href="https://docs.coinone.co.kr/">코인원 API 공식 문서</a>를 참조하거나,
  * 프로젝트 내 {@code docs/coinone-error-codes.md} 문서를 확인하세요.</p>
  * 
- * @see sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.config.CoinoneResponseErrorHandler 코인원 API 응답 에러 처리기
+ * @see sungjun.bitcoin.algorithmtrading.infrastructure.config.coinone.CoinoneResponseErrorHandler 코인원 API 응답 에러 처리기
  * @see <a href="https://docs.coinone.co.kr/">코인원 API 문서</a>
  * @see <a href="file:///docs/coinone-error-codes.md">프로젝트 에러 코드 가이드</a>
  */

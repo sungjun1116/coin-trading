@@ -1,4 +1,4 @@
-package sungjun.bitcoin.algorithmtrading.infrastructure.client.binance.interceptor;
+package sungjun.bitcoin.algorithmtrading.infrastructure.interceptor.binance;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpRequest;
@@ -6,7 +6,7 @@ import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
-import sungjun.bitcoin.algorithmtrading.infrastructure.client.binance.config.BinanceProperties;
+import sungjun.bitcoin.algorithmtrading.infrastructure.config.binance.BinanceProperties;
 
 import java.io.IOException;
 

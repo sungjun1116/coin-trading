@@ -1,4 +1,4 @@
-package sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.config;
+package sungjun.bitcoin.algorithmtrading.infrastructure.config.coinone;
 
 import lombok.Getter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -34,7 +34,7 @@ public class CoinoneProperties {
     /**
      * Coinone API 요청에 사용되는 Payload 헤더 이름입니다.
      */
-    public static final String X_COINONE_PAYLOD = "X-COINONE-PAYLOAD";
+    public static final String X_COINONE_PAYLOAD = "X-COINONE-PAYLOAD";
     
     /**
      * Coinone API 요청에 사용되는 Signature 헤더 이름입니다.

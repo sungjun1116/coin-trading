@@ -1,4 +1,5 @@
-package sungjun.bitcoin.algorithmtrading.infrastructure.client.binance.config;
+package sungjun.bitcoin.algorithmtrading.infrastructure.config.binance;
+
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -13,8 +14,8 @@ import org.springframework.web.client.RestClient;
 import org.springframework.web.client.support.RestClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.binance.BinanceAccountApiClient;
-import sungjun.bitcoin.algorithmtrading.infrastructure.client.binance.interceptor.BinanceAuthenticationInterceptor;
-import sungjun.bitcoin.algorithmtrading.infrastructure.client.interceptor.LoggingInterceptor;
+import sungjun.bitcoin.algorithmtrading.infrastructure.interceptor.binance.BinanceAuthenticationInterceptor;
+import sungjun.bitcoin.algorithmtrading.infrastructure.interceptor.common.LoggingInterceptor;
 
 import java.time.Duration;
 

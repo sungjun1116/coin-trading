@@ -1,4 +1,4 @@
-package sungjun.bitcoin.algorithmtrading.infrastructure.client.binance.exception;
+package sungjun.bitcoin.algorithmtrading.infrastructure.exception.binance;
 
 import lombok.Getter;
 
@@ -28,7 +28,7 @@ import lombok.Getter;
  * <p>더 자세한 에러 코드 정보는 <a href="https://developers.binance.com/docs/binance-spot-api-docs/errors">Binance API 공식 문서</a>를 참조하거나,
  * 프로젝트 내 {@code docs/binance-error-codes.md} 문서를 확인하세요.</p>
  * 
- * @see sungjun.bitcoin.algorithmtrading.infrastructure.client.binance.config.BinanceResponseErrorHandler 바이낸스 API 응답 에러 처리기
+ * @see sungjun.bitcoin.algorithmtrading.infrastructure.config.binance.BinanceResponseErrorHandler 바이낸스 API 응답 에러 처리기
  * @see <a href="https://developers.binance.com/docs/binance-spot-api-docs/errors">Binance API Error Codes</a>
  * @see <a href="file:///docs/binance-error-codes.md">프로젝트 에러 코드 가이드</a>
  */

@@ -31,7 +31,7 @@ public interface BinanceAccountApiClient {
      * @param recvWindow 요청 유효 시간 (밀리초, 최대 60000)
      * @param timestamp 요청 시각 (밀리초 단위 Unix timestamp)
      * @return {@link BinanceAccountApiResponse} 계정 정보 응답
-     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.client.binance.exception.BinanceApiException API 호출 실패 시
+     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.binance.BinanceApiException API 호출 실패 시
      */
     @GetExchange("/api/v3/account")
     BinanceAccountApiResponse getAccount(@RequestParam(value = "omitZeroBalances", required = false) boolean omitZeroBalances,
