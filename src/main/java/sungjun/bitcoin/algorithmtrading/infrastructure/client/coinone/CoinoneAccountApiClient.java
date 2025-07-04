@@ -23,27 +23,21 @@ import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.response.C
 public interface CoinoneAccountApiClient {
 
     /**
-     * 특정 통화의 계정 잔고를 조회합니다.
-     * <p>
-     * 지정된 통화에 대한 사용자의 계정 잔고 정보를 가져옵니다.
-     * </p>
+     * Retrieves the account balance for a specific currency from the Coinone exchange.
      *
-     * @param requestBody 계정 조회 요청 데이터
-     * @return {@link CoinoneAccountApiResponse} 계정 정보 응답
-     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.exception.CoinoneApiException API 호출 실패 시
+     * @param requestBody the request data specifying the currency to query
+     * @return the account balance information for the specified currency
+     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException if the API call fails
      */
     @PostExchange("/account/balance")
     CoinoneAccountApiResponse getAccount(@RequestBody CoinoneAccountRequest requestBody);
 
     /**
-     * 모든 통화의 계정 잔고를 일괄 조회합니다.
-     * <p>
-     * 사용자 계정에 있는 모든 통화(코인)의 잔고 정보를 가져옵니다.
-     * </p>
+     * Retrieves account balances for all currencies held by the user.
      *
-     * @param requestBody 계정 조회 요청 데이터
-     * @return {@link CoinoneAccountApiResponse} 전체 계정 정보 응답
-     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.exception.CoinoneApiException API 호출 실패 시
+     * @param requestBody the account request data specifying authentication and query details
+     * @return a response containing the complete account balance information across all currencies
+     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException if the API call fails
      */
     @PostExchange("/account/balance/all")
     CoinoneAccountApiResponse getAccounts(@RequestBody CoinoneAccountRequest requestBody);

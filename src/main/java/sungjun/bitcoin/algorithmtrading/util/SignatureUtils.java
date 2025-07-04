@@ -28,33 +28,30 @@ import java.security.NoSuchAlgorithmException;
 public class SignatureUtils {
 
     /**
-     * 문자열 데이터로 HMAC 서명을 생성합니다.
+     * Generates an HMAC signature for the given string data using the specified algorithm and secret key.
      * <p>
-     * 입력된 문자열을 UTF-8 인코딩으로 변환한 후 서명을 생성합니다.
+     * The input string is encoded as UTF-8 before signature generation. The resulting signature is returned as a lowercase hexadecimal string.
      * </p>
      *
-     * @param secretKey API 비밀 키
-     * @param data 서명을 생성할 데이터 (문자열)
-     * @param algorithm HMAC 알고리즘 (HmacSHA256, HmacSHA512 등)
-     * @return 16진수 형태의 서명 문자열
-     * @throws RuntimeException 서명 생성 실패 시
+     * @param secretKey the secret key used for HMAC generation
+     * @param data the input data to sign
+     * @param algorithm the HMAC algorithm to use (e.g., HmacSHA256, HmacSHA512)
+     * @return the generated HMAC signature as a hexadecimal string
+     * @throws RuntimeException if signature generation fails
      */
     public static String makeSignature(String secretKey, String data, String algorithm) {
         return makeSignature(secretKey, data.getBytes(StandardCharsets.UTF_8), algorithm);
     }
 
     /**
-     * 바이트 배열 데이터로 HMAC 서명을 생성합니다.
-     * <p>
-     * 지정된 HMAC 알고리즘을 사용하여 디지털 서명을 생성하고
-     * 16진수 문자열로 반환합니다.
-     * </p>
+     * Generates an HMAC signature for the given byte array using the specified algorithm and secret key.
      *
-     * @param secretKey API 비밀 키
-     * @param data 서명을 생성할 데이터 (바이트 배열)
-     * @param algorithm HMAC 알고리즘 (HmacSHA256, HmacSHA512 등)
-     * @return 16진수 형태의 서명 문자열
-     * @throws RuntimeException 알고리즘을 찾을 수 없거나 키가 잘못된 경우
+     * Converts the resulting signature to a lowercase hexadecimal string. Throws a RuntimeException if the algorithm is unavailable or the key is invalid.
+     *
+     * @param secretKey the secret key used for HMAC generation
+     * @param data the data to sign as a byte array
+     * @param algorithm the HMAC algorithm to use (e.g., HmacSHA256, HmacSHA512)
+     * @return the signature as a lowercase hexadecimal string
      */
     public static String makeSignature(String secretKey, byte[] data, String algorithm) {
         try {
@@ -77,14 +74,12 @@ public class SignatureUtils {
     }
 
     /**
-     * 바이트 배열을 16진수 문자열로 변환합니다.
-     * <p>
-     * 각 바이트를 2자리 16진수 문자열로 변환하여 연결합니다.
-     * 한 자리 숫자인 경우 앞에 0을 붙여 2자리로 만듭니다.
-     * </p>
+     * Converts a byte array to a lowercase hexadecimal string.
      *
-     * @param bytes 변환할 바이트 배열
-     * @return 16진수 문자열 (소문자)
+     * Each byte is represented as a two-character hex string, with a leading zero if necessary.
+     *
+     * @param bytes the byte array to convert
+     * @return a lowercase hexadecimal string representation of the byte array
      */
     private String bytesToHex(byte[] bytes) {
         StringBuilder hexString = new StringBuilder();
