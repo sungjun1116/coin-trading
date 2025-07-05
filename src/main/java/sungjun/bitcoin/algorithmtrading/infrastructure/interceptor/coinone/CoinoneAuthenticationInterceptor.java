@@ -32,6 +32,18 @@ public class CoinoneAuthenticationInterceptor implements ClientHttpRequestInterc
 
     private final CoinoneProperties properties;
 
+    /**
+     * Intercepts an HTTP request to add Coinone API authentication headers.
+     *
+     * Encodes the request body in Base64, generates an HMAC signature using the configured secret key and algorithm,
+     * and sets the `X-COINONE-PAYLOAD` and `X-COINONE-SIGNATURE` headers before forwarding the request.
+     *
+     * @param request the HTTP request to intercept
+     * @param body the request body as a byte array
+     * @param execution the request execution context
+     * @return the HTTP response from the executed request
+     * @throws IOException if an I/O error occurs during request execution
+     */
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
         String encodedPayload = Base64.getEncoder().encodeToString(body);

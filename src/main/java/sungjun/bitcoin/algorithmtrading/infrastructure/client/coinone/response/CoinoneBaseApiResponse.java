@@ -29,10 +29,10 @@ public abstract class CoinoneBaseApiResponse {
     protected String errorCode;
 
     /**
-     * CoinoneBaseApiResponse 생성자입니다.
+     * Initializes a CoinoneBaseApiResponse with the specified API result and error code.
      *
-     * @param result API 호출 결과
-     * @param errorCode 에러 코드
+     * @param result    the result of the API call, typically "success" or "error"
+     * @param errorCode the error code if an error occurred; null if the call was successful
      */
     protected CoinoneBaseApiResponse(String result, String errorCode) {
         this.result = result;

@@ -35,6 +35,22 @@ public final class CoinoneTiker {
     private List<BestOrderBook> bestBids;
     private String id;
 
+    /**
+     * Constructs a CoinoneTiker instance with the specified ticker and order book data for a currency pair.
+     *
+     * @param quoteCurrency   the quote currency symbol
+     * @param targetCurrency  the target currency symbol
+     * @param timeStamp       the timestamp of the ticker data
+     * @param high            the highest price in the period
+     * @param low             the lowest price in the period
+     * @param first           the first traded price in the period
+     * @param last            the last traded price in the period
+     * @param quoteVolume     the traded volume in quote currency
+     * @param targetVolume    the traded volume in target currency
+     * @param bestAsks        the list of best ask order book entries
+     * @param bestBids        the list of best bid order book entries
+     * @param id              the unique identifier for this ticker data
+     */
     @Builder
     private CoinoneTiker(
         String quoteCurrency,
@@ -83,10 +99,10 @@ public final class CoinoneTiker {
         private final String qty;
 
         /**
-         * BestOrderBook 생성자입니다.
+         * Constructs a BestOrderBook entry with the specified price and quantity.
          *
-         * @param price 호가 가격
-         * @param qty 호가 수량
+         * @param price the price of the order as a string
+         * @param qty the quantity of the order as a string
          */
         @Builder
         private BestOrderBook(String price, String qty) {

@@ -27,12 +27,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AlgorithmTradingApplication {
 
     /**
-     * 애플리케이션의 진입점입니다.
-     * <p>
-     * Spring Boot 애플리케이션을 시작하고 자동 구성을 활성화합니다.
-     * </p>
+     * Application entry point that launches the Spring Boot algorithm trading service.
      *
-     * @param args 명령줄 인수
+     * Starts the application context and embedded server using the provided command-line arguments.
+     *
+     * @param args command-line arguments passed to the application
      */
     public static void main(String[] args) {
         SpringApplication.run(AlgorithmTradingApplication.class, args);

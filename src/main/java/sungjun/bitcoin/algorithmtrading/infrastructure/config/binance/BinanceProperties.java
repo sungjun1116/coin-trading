@@ -72,14 +72,14 @@ public class BinanceProperties {
     private String signatureAlgorithm;
 
     /**
-     * BinanceProperties 생성자입니다.
+     * Constructs a BinanceProperties instance with the specified API configuration values.
      *
-     * @param url API 기본 URL
-     * @param accessToken API 키
-     * @param secretKey API 비밀 키
-     * @param connectionTimeout 연결 타임아웃
-     * @param readTimeout 읽기 타임아웃
-     * @param signatureAlgorithm 서명 알고리즘
+     * @param url the base URL for the Binance API
+     * @param accessToken the API key used for authentication
+     * @param secretKey the secret key used for signature generation
+     * @param connectionTimeout the HTTP connection timeout in seconds
+     * @param readTimeout the HTTP read timeout in seconds
+     * @param signatureAlgorithm the algorithm used for signature generation (e.g., HmacSHA256)
      */
     @ConstructorBinding
     public BinanceProperties(String url, String accessToken, String secretKey, Long connectionTimeout, Long readTimeout, String signatureAlgorithm) {

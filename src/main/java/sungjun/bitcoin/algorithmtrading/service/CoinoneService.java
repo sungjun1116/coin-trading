@@ -21,24 +21,21 @@ public class CoinoneService {
     private final CoinoneTickerApiClient coinoneTickerApiClient;
 
     /**
-     * CoinoneService 생성자입니다.
+     * Constructs a CoinoneService with the specified CoinoneTickerApiClient.
      *
-     * @param coinoneTickerApiClient Coinone Ticker API 클라이언트
+     * @param coinoneTickerApiClient the API client used to interact with the Coinone ticker service
      */
     public CoinoneService(CoinoneTickerApiClient coinoneTickerApiClient) {
         this.coinoneTickerApiClient = coinoneTickerApiClient;
     }
 
     /**
-     * 지정된 통화쌍의 현재 시세 정보를 조회합니다.
-     * <p>
-     * Coinone API를 통해 실시간 시세 정보를 가져와서 첫 번째 티커 데이터를 반환합니다.
-     * </p>
+     * Retrieves the latest ticker information for the specified currency pair from the Coinone exchange.
      *
-     * @param quoteCurrency 기준 통화 (예: KRW)
-     * @param targetCurrency 대상 통화 (예: BTC)
-     * @return {@link CoinoneTiker} 시세 정보 객체
-     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException API 호출 실패 시
+     * @param quoteCurrency the base currency (e.g., "KRW")
+     * @param targetCurrency the target currency (e.g., "BTC")
+     * @return the first {@link CoinoneTiker} object from the API response representing the current ticker data
+     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException if the API call fails
      */
     public CoinoneTiker getTicker(String quoteCurrency, String targetCurrency) {
         CoinoneTickerApiResponse apiResponse = coinoneTickerApiClient.getTicker(quoteCurrency, targetCurrency);
