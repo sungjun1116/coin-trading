@@ -24,7 +24,7 @@ A **production-ready** Java cryptocurrency trading platform built with **Layered
 
 This project follows **Layered Architecture** principles for maintainability and scalability:
 
-```
+```text
 📁 Application Layer
 ├── 🎯 Service Layer (Business Logic)
 └── 🏗️ Infrastructure Layer
@@ -102,7 +102,7 @@ binance:
 
 ## 📂 Project Structure
 
-```
+```text
 🏗️ Layered Architecture Structure
 
 src/main/java/sungjun/bitcoin/algorithmtrading/
