@@ -25,11 +25,11 @@ public class CoinoneAccountRequest extends CoinonePrivateBaseRequest {
     private List<String> currencies;
 
     /**
-     * CoinoneAccountRequest 생성자입니다.
+     * Constructs a request object for querying account balances from the Coinone API.
      *
-     * @param accessToken 액세스 토큰
-     * @param nonce 요청 고유 번호
-     * @param currencies 조회할 통화 목록
+     * @param accessToken the API access token for authentication
+     * @param nonce a unique identifier for the request
+     * @param currencies a list of currency codes to filter the balances; if null, all currencies are queried
      */
     @Builder
     private CoinoneAccountRequest(String accessToken, String nonce, List<String> currencies) {

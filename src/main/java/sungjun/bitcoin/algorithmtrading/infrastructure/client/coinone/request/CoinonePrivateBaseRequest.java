@@ -32,10 +32,10 @@ public abstract class CoinonePrivateBaseRequest {
     protected String nonce;
 
     /**
-     * CoinonePrivateBaseRequest 생성자입니다.
+     * Initializes a new authenticated Coinone API request with the specified access token and nonce.
      *
-     * @param accessToken 액세스 토큰
-     * @param nonce 요청 고유 번호
+     * @param accessToken the API access token used for authentication
+     * @param nonce a unique identifier for the request to prevent replay attacks
      */
     protected CoinonePrivateBaseRequest(String accessToken, String nonce) {
         this.accessToken = accessToken;

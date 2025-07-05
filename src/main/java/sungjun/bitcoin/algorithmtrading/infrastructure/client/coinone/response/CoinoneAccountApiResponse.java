@@ -25,11 +25,11 @@ public class CoinoneAccountApiResponse extends CoinoneBaseApiResponse {
     private List<CoinoneBalance> balances;
 
     /**
-     * CoinoneAccountApiResponse 생성자입니다.
+     * Constructs a CoinoneAccountApiResponse with the specified API result, error code, and account balance information.
      *
-     * @param result API 호출 결과
-     * @param errorCode 에러 코드
-     * @param balances 계정 잔고 정보 목록
+     * @param result the result status of the API call
+     * @param errorCode the error code returned by the API, if any
+     * @param balances the list of account balances for various currencies
      */
     @Builder
     private CoinoneAccountApiResponse(String result, String errorCode, List<CoinoneBalance> balances) {

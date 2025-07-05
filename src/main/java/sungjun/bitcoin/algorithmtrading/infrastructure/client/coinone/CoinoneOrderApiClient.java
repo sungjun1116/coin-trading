@@ -26,29 +26,27 @@ import java.util.Map;
 public interface CoinoneOrderApiClient {
 
     /**
-     * 새로운 주문을 생성합니다.
+     * Creates a new buy or sell order for a specified currency pair on the Coinone exchange.
      * <p>
-     * 지정된 통화쌍에 대해 매수 또는 매도 주문을 생성합니다.
-     * 주문 유형(지정가/시장가)과 수량, 가격 등을 지정할 수 있습니다.
+     * Allows specifying order type (limit or market), quantity, price, and other order details.
      * </p>
      *
-     * @param request 주문 생성 요청 데이터
-     * @return {@link CoinoneOrderApiResponse} 주문 결과 응답
-     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException API 호출 실패 시
+     * @param request the order creation request containing order parameters
+     * @return the API response representing the result of the order creation
+     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException if the API call fails
      */
     @PostExchange("/order")
     CoinoneOrderApiResponse order(@RequestBody CoinoneOrderRequest request);
 
     /**
-     * 모든 대기 주문을 일괄 취소합니다.
+     * Cancels all pending (unfilled) orders for the user on the Coinone exchange.
      * <p>
-     * 사용자의 모든 대기 주문(미체결 주문)을 일괄적으로 취소합니다.
-     * 주의: 이 작업은 되돌릴 수 없습니다.
+     * This operation is irreversible and will remove all open orders associated with the user's account.
      * </p>
      *
-     * @param request 주문 취소 요청 데이터
-     * @return {@code Map<String, String>} 취소 결과 정보
-     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException API 호출 실패 시
+     * @param request the cancellation request containing relevant user and order information
+     * @return a map containing details about the cancellation results
+     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException if the API call fails
      */
     @PostExchange("/order/cancel/all")
     Map<String, String> cancelAll(@RequestBody CoinoneOrderCancelRequest request);

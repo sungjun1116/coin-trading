@@ -39,13 +39,13 @@ public class CoinoneBalance {
      */
     private String currency;
 
-    /**
-     * CoinoneBalance 생성자입니다.
+    /****
+     * Constructs a CoinoneBalance instance with the specified available amount, limit, average purchase price, and currency code.
      *
-     * @param available 사용 가능한 잔고
-     * @param limit 제한 금액
-     * @param averagePrice 평균 매수가
-     * @param currency 통화 코드
+     * @param available     the available balance amount
+     * @param limit         the limit amount or total balance
+     * @param averagePrice  the average purchase price
+     * @param currency      the currency code (e.g., KRW, BTC)
      */
     @Builder
     private CoinoneBalance(String available, String limit, String averagePrice, String currency) {
