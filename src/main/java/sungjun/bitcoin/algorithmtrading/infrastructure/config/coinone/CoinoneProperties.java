@@ -1,6 +1,7 @@
 package sungjun.bitcoin.algorithmtrading.infrastructure.config.coinone;
 
 import lombok.Getter;
+import lombok.ToString;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.bind.ConstructorBinding;
 import org.springframework.validation.annotation.Validated;
@@ -33,6 +34,7 @@ import jakarta.validation.constraints.NotNull;
  */
 @Getter
 @Validated
+@ToString(exclude = {"accessToken", "secretKey"})
 @ConfigurationProperties(prefix = "coinone.api")
 public class CoinoneProperties {
 
