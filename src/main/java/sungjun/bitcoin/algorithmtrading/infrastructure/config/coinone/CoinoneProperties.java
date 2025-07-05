@@ -3,6 +3,10 @@ package sungjun.bitcoin.algorithmtrading.infrastructure.config.coinone;
 import lombok.Getter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.bind.ConstructorBinding;
+import org.springframework.validation.annotation.Validated;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * Coinone API 설정 프로퍼티 클래스입니다.
@@ -28,6 +32,7 @@ import org.springframework.boot.context.properties.bind.ConstructorBinding;
  * @since 1.0
  */
 @Getter
+@Validated
 @ConfigurationProperties(prefix = "coinone.api")
 public class CoinoneProperties {
 
@@ -44,36 +49,43 @@ public class CoinoneProperties {
     /**
      * 공개 API URL (인증이 필요하지 않은 API용)
      */
+    @NotBlank(message = "공개 API URL은 필수 값입니다.")
     private String publicUrl;
 
     /**
      * 비공개 API URL (인증이 필요한 API용)
      */
+    @NotBlank(message = "비공개 API URL은 필수 값입니다.")
     private String privateUrl;
 
     /**
      * Coinone API 액세스 토큰
      */
+    @NotBlank(message = "Access token은 필수 값입니다.")
     private String accessToken;
 
     /**
      * Coinone API 비밀 키 (서명 생성용)
      */
+    @NotBlank(message = "Secret key는 필수 값입니다.")
     private String secretKey;
 
     /**
      * HTTP 연결 타임아웃 (초 단위)
      */
+    @NotNull(message = "연결 타임아웃은 필수 값입니다.")
     private Long connectionTimeout;
 
     /**
      * HTTP 읽기 타임아웃 (초 단위)
      */
+    @NotNull(message = "읽기 타임아웃은 필수 값입니다.")
     private Long readTimeout;
 
     /**
      * 서명 생성에 사용할 알고리즘 (예: HmacSHA512)
      */
+    @NotBlank(message = "서명 알고리즘은 필수 값입니다.")
     private String signatureAlgorithm;
 
     /**

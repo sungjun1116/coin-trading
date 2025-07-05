@@ -3,6 +3,10 @@ package sungjun.bitcoin.algorithmtrading.infrastructure.config.binance;
 import lombok.Getter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.bind.ConstructorBinding;
+import org.springframework.validation.annotation.Validated;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * Binance API 설정 프로퍼티 클래스입니다.
@@ -27,37 +31,44 @@ import org.springframework.boot.context.properties.bind.ConstructorBinding;
  * @since 1.0
  */
 @Getter
+@Validated
 @ConfigurationProperties(prefix = "binance.api")
 public class BinanceProperties {
 
     /**
      * Binance API 기본 URL
      */
+    @NotBlank(message = "Binance API URL은 필수 값입니다.")
     private String url;
 
     /**
      * Binance API 키 (Access Token)
      */
+    @NotBlank(message = "Access token은 필수 값입니다.")
     private String accessToken;
 
     /**
      * Binance API 비밀 키 (서명 생성용)
      */
+    @NotBlank(message = "Secret key는 필수 값입니다.")
     private String secretKey;
 
     /**
      * HTTP 연결 타임아웃 (초 단위)
      */
+    @NotNull(message = "연결 타임아웃은 필수 값입니다.")
     private Long connectionTimeout;
 
     /**
      * HTTP 읽기 타임아웃 (초 단위)
      */
+    @NotNull(message = "읽기 타임아웃은 필수 값입니다.")
     private Long readTimeout;
 
     /**
      * 서명 생성에 사용할 알고리즘 (예: HmacSHA256)
      */
+    @NotBlank(message = "서명 알고리즘은 필수 값입니다.")
     private String signatureAlgorithm;
 
     /**
