@@ -87,16 +87,17 @@ public final class CoinoneTicker {
      * </p>
      */
     @Getter
+    @NoArgsConstructor
     static class BestOrderBook {
         /**
          * 호가 가격 (문자열 형태)
          */
-        private final String price;
+        private String price;
         
         /**
          * 호가 수량 (문자열 형태)
          */
-        private final String qty;
+        private String qty;
 
         /**
          * Constructs a BestOrderBook entry with the specified price and quantity.
