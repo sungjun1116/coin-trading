@@ -36,20 +36,20 @@ public final class CoinoneTiker {
     private String id;
 
     /**
-     * Constructs a CoinoneTiker instance with the specified ticker and order book data for a currency pair.
+     * Creates a CoinoneTiker instance containing ticker and order book data for a specific currency pair.
      *
-     * @param quoteCurrency   the quote currency symbol
-     * @param targetCurrency  the target currency symbol
-     * @param timeStamp       the timestamp of the ticker data
-     * @param high            the highest price in the period
-     * @param low             the lowest price in the period
-     * @param first           the first traded price in the period
-     * @param last            the last traded price in the period
-     * @param quoteVolume     the traded volume in quote currency
-     * @param targetVolume    the traded volume in target currency
-     * @param bestAsks        the list of best ask order book entries
-     * @param bestBids        the list of best bid order book entries
-     * @param id              the unique identifier for this ticker data
+     * @param quoteCurrency the symbol of the quote currency
+     * @param targetCurrency the symbol of the target currency
+     * @param timeStamp the timestamp representing when the ticker data was recorded
+     * @param high the highest price during the period, as a string
+     * @param low the lowest price during the period, as a string
+     * @param first the first traded price in the period, as a string
+     * @param last the last traded price in the period, as a string
+     * @param quoteVolume the traded volume in the quote currency, as a string
+     * @param targetVolume the traded volume in the target currency, as a string
+     * @param bestAsks the list of best ask order book entries
+     * @param bestBids the list of best bid order book entries
+     * @param id the unique identifier for this ticker data
      */
     @Builder
     private CoinoneTiker(
@@ -99,10 +99,10 @@ public final class CoinoneTiker {
         private final String qty;
 
         /**
-         * Constructs a BestOrderBook entry with the specified price and quantity.
+         * Creates a BestOrderBook entry with the given price and quantity.
          *
-         * @param price the price of the order as a string
-         * @param qty the quantity of the order as a string
+         * @param price the string representation of the order price
+         * @param qty the string representation of the order quantity
          */
         @Builder
         private BestOrderBook(String price, String qty) {

@@ -27,11 +27,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AlgorithmTradingApplication {
 
     /**
-     * Application entry point that launches the Spring Boot algorithm trading service.
+     * Application entry point for launching the Spring Boot-based algorithm trading service.
      *
-     * Starts the application context and embedded server using the provided command-line arguments.
+     * Initializes the application context and embedded server using the provided command-line arguments.
      *
-     * @param args command-line arguments passed to the application
+     * @param args command-line arguments for application startup
      */
     public static void main(String[] args) {
         SpringApplication.run(AlgorithmTradingApplication.class, args);

@@ -72,11 +72,11 @@ public class BinanceProperties {
     private String signatureAlgorithm;
 
     /**
-     * Constructs a BinanceProperties instance with the specified API configuration values.
+     * Initializes a new BinanceProperties instance with the provided API configuration values.
      *
      * @param url the base URL for the Binance API
-     * @param accessToken the API key used for authentication
-     * @param secretKey the secret key used for signature generation
+     * @param accessToken the API key for authentication
+     * @param secretKey the secret key for signature generation
      * @param connectionTimeout the HTTP connection timeout in seconds
      * @param readTimeout the HTTP read timeout in seconds
      * @param signatureAlgorithm the algorithm used for signature generation (e.g., HmacSHA256)

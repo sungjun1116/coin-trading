@@ -21,21 +21,21 @@ public class CoinoneService {
     private final CoinoneTickerApiClient coinoneTickerApiClient;
 
     /**
-     * Constructs a CoinoneService with the specified CoinoneTickerApiClient.
+     * Initializes the CoinoneService with the provided CoinoneTickerApiClient.
      *
-     * @param coinoneTickerApiClient the API client used to interact with the Coinone ticker service
+     * @param coinoneTickerApiClient the client used to access Coinone ticker data
      */
     public CoinoneService(CoinoneTickerApiClient coinoneTickerApiClient) {
         this.coinoneTickerApiClient = coinoneTickerApiClient;
     }
 
     /**
-     * Retrieves the latest ticker information for the specified currency pair from the Coinone exchange.
+     * Fetches the latest ticker data for a given currency pair from the Coinone exchange.
      *
-     * @param quoteCurrency the base currency (e.g., "KRW")
-     * @param targetCurrency the target currency (e.g., "BTC")
-     * @return the first {@link CoinoneTiker} object from the API response representing the current ticker data
-     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException if the API call fails
+     * @param quoteCurrency the base currency code (e.g., "KRW")
+     * @param targetCurrency the target currency code (e.g., "BTC")
+     * @return the first {@link CoinoneTiker} representing the current ticker information for the specified pair
+     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException if the Coinone API request fails
      */
     public CoinoneTiker getTicker(String quoteCurrency, String targetCurrency) {
         CoinoneTickerApiResponse apiResponse = coinoneTickerApiClient.getTicker(quoteCurrency, targetCurrency);

@@ -33,15 +33,15 @@ public class CoinoneAuthenticationInterceptor implements ClientHttpRequestInterc
     private final CoinoneProperties properties;
 
     /**
-     * Intercepts an HTTP request to add Coinone API authentication headers.
+     * Adds Coinone API authentication headers to an outgoing HTTP request.
      *
-     * Encodes the request body in Base64, generates an HMAC signature using the configured secret key and algorithm,
-     * and sets the `X-COINONE-PAYLOAD` and `X-COINONE-SIGNATURE` headers before forwarding the request.
+     * Encodes the request body in Base64 and generates an HMAC signature using the configured secret key and algorithm.
+     * Sets the `X-COINONE-PAYLOAD` and `X-COINONE-SIGNATURE` headers before forwarding the request for execution.
      *
-     * @param request the HTTP request to intercept
+     * @param request the HTTP request being intercepted
      * @param body the request body as a byte array
-     * @param execution the request execution context
-     * @return the HTTP response from the executed request
+     * @param execution the context for executing the request
+     * @return the HTTP response resulting from the executed request
      * @throws IOException if an I/O error occurs during request execution
      */
     @Override

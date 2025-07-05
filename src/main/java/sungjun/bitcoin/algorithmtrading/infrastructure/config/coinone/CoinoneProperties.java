@@ -89,15 +89,15 @@ public class CoinoneProperties {
     private String signatureAlgorithm;
 
     /**
-     * Constructs a new {@code CoinoneProperties} instance with the specified Coinone API configuration values.
+     * Initializes a new CoinoneProperties instance with the provided API configuration values.
      *
-     * @param publicUrl the URL for public Coinone API endpoints
-     * @param privateUrl the URL for private Coinone API endpoints requiring authentication
-     * @param accessToken the API access token used for authentication
-     * @param secretKey the secret key for generating request signatures
-     * @param connectionTimeout the HTTP connection timeout in seconds
-     * @param readTimeout the HTTP read timeout in seconds
-     * @param signatureAlgorithm the algorithm name used for signature generation (e.g., "HmacSHA512")
+     * @param publicUrl URL for public Coinone API endpoints.
+     * @param privateUrl URL for private Coinone API endpoints requiring authentication.
+     * @param accessToken API access token for authentication.
+     * @param secretKey Secret key used for generating request signatures.
+     * @param connectionTimeout HTTP connection timeout in seconds.
+     * @param readTimeout HTTP read timeout in seconds.
+     * @param signatureAlgorithm Algorithm name for signature generation (e.g., "HmacSHA512").
      */
     @ConstructorBinding
     public CoinoneProperties(String publicUrl, String privateUrl, String accessToken, String secretKey, Long connectionTimeout, Long readTimeout, String signatureAlgorithm) {

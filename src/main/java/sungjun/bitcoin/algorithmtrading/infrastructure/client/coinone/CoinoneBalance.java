@@ -39,13 +39,13 @@ public class CoinoneBalance {
      */
     private String currency;
 
-    /****
-     * Constructs a CoinoneBalance instance with the specified available amount, limit, average purchase price, and currency code.
+    /**
+     * Creates a CoinoneBalance instance representing account balance details for a specific currency.
      *
-     * @param available     the available balance amount
-     * @param limit         the limit amount or total balance
-     * @param averagePrice  the average purchase price
-     * @param currency      the currency code (e.g., KRW, BTC)
+     * @param available the available balance amount
+     * @param limit the total or limit balance amount
+     * @param averagePrice the average purchase price
+     * @param currency the currency code (e.g., KRW, BTC)
      */
     @Builder
     private CoinoneBalance(String available, String limit, String averagePrice, String currency) {

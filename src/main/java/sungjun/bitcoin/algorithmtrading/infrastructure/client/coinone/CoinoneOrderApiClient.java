@@ -26,26 +26,23 @@ import java.util.Map;
 public interface CoinoneOrderApiClient {
 
     /**
-     * Creates a new buy or sell order for a specified currency pair on the Coinone exchange.
-     * <p>
-     * Allows specifying order type (limit or market), quantity, price, and other order details.
-     * </p>
+     * Submits a buy or sell order for a specified currency pair on the Coinone exchange.
      *
-     * @param request the order creation request containing order parameters
-     * @return the API response representing the result of the order creation
-     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException if the API call fails
+     * @param request the order details including type, quantity, price, and other parameters
+     * @return the response containing the result of the order submission
+     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException if the API request fails
      */
     @PostExchange("/order")
     CoinoneOrderApiResponse order(@RequestBody CoinoneOrderRequest request);
 
     /**
-     * Cancels all pending (unfilled) orders for the user on the Coinone exchange.
+     * Cancels all open orders for the user on the Coinone exchange.
      * <p>
-     * This operation is irreversible and will remove all open orders associated with the user's account.
+     * This action removes all pending orders linked to the user's account and cannot be undone.
      * </p>
      *
-     * @param request the cancellation request containing relevant user and order information
-     * @return a map containing details about the cancellation results
+     * @param request the cancellation request with user and order details
+     * @return a map containing information about the cancellation outcome
      * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException if the API call fails
      */
     @PostExchange("/order/cancel/all")

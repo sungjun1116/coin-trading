@@ -28,30 +28,30 @@ import java.security.NoSuchAlgorithmException;
 public class SignatureUtils {
 
     /**
-     * Generates an HMAC signature for the given string data using the specified algorithm and secret key.
+     * Generates an HMAC signature for the provided string data using the specified algorithm and secret key.
      * <p>
      * The input string is encoded as UTF-8 before signature generation. The resulting signature is returned as a lowercase hexadecimal string.
      * </p>
      *
-     * @param secretKey the secret key used for HMAC generation
-     * @param data the input data to sign
+     * @param secretKey the secret key for HMAC generation
+     * @param data the string data to sign
      * @param algorithm the HMAC algorithm to use (e.g., HmacSHA256, HmacSHA512)
-     * @return the generated HMAC signature as a hexadecimal string
-     * @throws RuntimeException if signature generation fails
+     * @return the generated HMAC signature as a lowercase hexadecimal string
+     * @throws RuntimeException if signature generation fails due to an invalid key or unavailable algorithm
      */
     public static String makeSignature(String secretKey, String data, String algorithm) {
         return makeSignature(secretKey, data.getBytes(StandardCharsets.UTF_8), algorithm);
     }
 
     /**
-     * Generates an HMAC signature for the given byte array using the specified algorithm and secret key.
+     * Generates an HMAC signature for the provided data using the specified algorithm and secret key.
      *
-     * Converts the resulting signature to a lowercase hexadecimal string. Throws a RuntimeException if the algorithm is unavailable or the key is invalid.
+     * The signature is returned as a lowercase hexadecimal string. Throws a RuntimeException if the algorithm is unavailable or the key is invalid.
      *
-     * @param secretKey the secret key used for HMAC generation
+     * @param secretKey the secret key for HMAC generation
      * @param data the data to sign as a byte array
      * @param algorithm the HMAC algorithm to use (e.g., HmacSHA256, HmacSHA512)
-     * @return the signature as a lowercase hexadecimal string
+     * @return the generated HMAC signature as a lowercase hexadecimal string
      */
     public static String makeSignature(String secretKey, byte[] data, String algorithm) {
         try {
@@ -74,12 +74,12 @@ public class SignatureUtils {
     }
 
     /**
-     * Converts a byte array to a lowercase hexadecimal string.
+     * Converts a byte array to its lowercase hexadecimal string representation.
      *
-     * Each byte is represented as a two-character hex string, with a leading zero if necessary.
+     * Each byte is converted to a two-character hex value, padded with a leading zero if necessary.
      *
      * @param bytes the byte array to convert
-     * @return a lowercase hexadecimal string representation of the byte array
+     * @return the resulting lowercase hexadecimal string
      */
     private String bytesToHex(byte[] bytes) {
         StringBuilder hexString = new StringBuilder();

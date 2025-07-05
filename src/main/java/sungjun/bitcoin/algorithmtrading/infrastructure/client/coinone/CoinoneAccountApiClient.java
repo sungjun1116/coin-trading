@@ -23,20 +23,20 @@ import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.response.C
 public interface CoinoneAccountApiClient {
 
     /**
-     * Retrieves the account balance for a specific currency from the Coinone exchange.
+     * Retrieves the account balance for a specified currency from the Coinone exchange.
      *
-     * @param requestBody the request data specifying the currency to query
-     * @return the account balance information for the specified currency
-     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException if the API call fails
+     * @param requestBody contains authentication and currency information for the balance query
+     * @return the account balance details for the requested currency
+     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException if the API request fails
      */
     @PostExchange("/account/balance")
     CoinoneAccountApiResponse getAccount(@RequestBody CoinoneAccountRequest requestBody);
 
     /**
-     * Retrieves account balances for all currencies held by the user.
+     * Retrieves the user's account balances for all supported currencies from the Coinone API.
      *
-     * @param requestBody the account request data specifying authentication and query details
-     * @return a response containing the complete account balance information across all currencies
+     * @param requestBody the request containing authentication and query parameters
+     * @return the account balances for all currencies associated with the user
      * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException if the API call fails
      */
     @PostExchange("/account/balance/all")
