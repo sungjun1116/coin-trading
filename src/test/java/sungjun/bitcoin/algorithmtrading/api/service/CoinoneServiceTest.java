@@ -3,7 +3,8 @@ package sungjun.bitcoin.algorithmtrading.api.service;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import sungjun.bitcoin.algorithmtrading.client.coinone.CoinoneTiker;
+import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.CoinoneTicker;
+import sungjun.bitcoin.algorithmtrading.service.CoinoneService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,7 +21,7 @@ class CoinoneServiceTest extends IntegrationServiceTestSupport {
         String targetCurrency = "btc";
 
         // when
-        CoinoneTiker ticker = coinoneService.getTicker(quoteCurrency, targetCurrency);
+        CoinoneTicker ticker = coinoneService.getTicker(quoteCurrency, targetCurrency);
 
         // then
         assertThat(ticker.getQuoteCurrency()).isEqualTo(quoteCurrency);
