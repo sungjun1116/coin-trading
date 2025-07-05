@@ -15,8 +15,8 @@ public class MockCoinoneTickerApiClient implements CoinoneTickerApiClient {
             .build();
     }
 
-    private List<CoinoneTiker> createTicker() {
-        CoinoneTiker ticker = CoinoneTiker.builder()
+    private List<CoinoneTicker> createTicker() {
+        CoinoneTicker ticker = CoinoneTicker.builder()
             .quoteCurrency("krw")
             .targetCurrency("btc")
             .build();

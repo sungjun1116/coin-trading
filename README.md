@@ -161,7 +161,7 @@ private CoinoneService coinoneService;
 
 // Get ticker information through service layer
 public void getMarketData() {
-    CoinoneTiker ticker = coinoneService.getTicker("KRW", "BTC");
+    CoinoneTicker ticker = coinoneService.getTicker("KRW", "BTC");
     System.out.println("BTC/KRW Price: " + ticker.getLast());
 }
 ```
@@ -194,7 +194,7 @@ public void getAccountInfo() {
 // Market data
 public void getTickerInfo() {
     CoinoneTickerApiResponse response = coinoneTickerApiClient.getTicker("KRW", "BTC");
-    CoinoneTiker ticker = response.getTicker();
+    CoinoneTicker ticker = response.getTicker();
     log.info("BTC Price: {} KRW", ticker.getLast());
 }
 ```

@@ -21,7 +21,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public final class CoinoneTiker {
+public final class CoinoneTicker {
     private String quoteCurrency;
     private String targetCurrency;
     private int timeStamp;
@@ -36,7 +36,7 @@ public final class CoinoneTiker {
     private String id;
 
     /**
-     * Constructs a CoinoneTiker instance with the specified ticker and order book data for a currency pair.
+     * Constructs a CoinoneTicker instance with the specified ticker and order book data for a currency pair.
      *
      * @param quoteCurrency   the quote currency symbol
      * @param targetCurrency  the target currency symbol
@@ -52,7 +52,7 @@ public final class CoinoneTiker {
      * @param id              the unique identifier for this ticker data
      */
     @Builder
-    private CoinoneTiker(
+    private CoinoneTicker(
         String quoteCurrency,
         String targetCurrency,
         int timeStamp,

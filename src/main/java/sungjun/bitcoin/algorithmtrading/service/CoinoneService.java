@@ -2,7 +2,7 @@ package sungjun.bitcoin.algorithmtrading.service;
 
 import org.springframework.stereotype.Service;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.CoinoneTickerApiClient;
-import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.CoinoneTiker;
+import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.CoinoneTicker;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.response.CoinoneTickerApiResponse;
 
 /**
@@ -34,10 +34,10 @@ public class CoinoneService {
      *
      * @param quoteCurrency the base currency (e.g., "KRW")
      * @param targetCurrency the target currency (e.g., "BTC")
-     * @return the first {@link CoinoneTiker} object from the API response representing the current ticker data
+     * @return the first {@link CoinoneTicker} object from the API response representing the current ticker data
      * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException if the API call fails
      */
-    public CoinoneTiker getTicker(String quoteCurrency, String targetCurrency) {
+    public CoinoneTicker getTicker(String quoteCurrency, String targetCurrency) {
         CoinoneTickerApiResponse apiResponse = coinoneTickerApiClient.getTicker(quoteCurrency, targetCurrency);
         return apiResponse.getTickers().getFirst();
     }

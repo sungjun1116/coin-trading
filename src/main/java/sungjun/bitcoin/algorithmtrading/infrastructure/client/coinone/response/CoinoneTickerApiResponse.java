@@ -2,7 +2,7 @@ package sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.response;
 
 import lombok.Builder;
 import lombok.Getter;
-import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.CoinoneTiker;
+import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.CoinoneTicker;
 
 import java.util.List;
 
@@ -11,10 +11,10 @@ public class CoinoneTickerApiResponse extends CoinoneBaseApiResponse {
 
     private String serverTime;
 
-    private List<CoinoneTiker> tickers;
+    private List<CoinoneTicker> tickers;
 
     @Builder
-    private CoinoneTickerApiResponse(String result, String errorCode, String serverTime, List<CoinoneTiker> tickers) {
+    private CoinoneTickerApiResponse(String result, String errorCode, String serverTime, List<CoinoneTicker> tickers) {
         super(result, errorCode);
         this.serverTime = serverTime;
         this.tickers = tickers;
