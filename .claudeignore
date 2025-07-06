@@ -2,6 +2,10 @@
 *.key
 *.pem
 .env
+.env.*
+*.crt
+*.p12
+secret-*.json
 config/secrets.json
 
 # 빌드 결과물
@@ -14,6 +18,9 @@ target/
 
 # 로그 및 임시 파일
 *.log
+debug.log
+*.pid
+hs_err_pid*.log
 logs/
 tmp/
 .cache/

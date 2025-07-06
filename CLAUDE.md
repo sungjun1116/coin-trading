@@ -33,7 +33,7 @@
 
 ## 🏗️ 프로젝트 구조
 
-```
+```text
 📁 Application Layer
 ├── 🎯 Service Layer (비즈니스 로직)
 └── 🏗️ Infrastructure Layer
@@ -122,7 +122,7 @@
 - **`release/`** - 배포 준비
 
 ### 브랜치 명명 규칙
-```
+```text
 {타입}/#{이슈번호}-{간단한-설명}
 ```
 
@@ -165,7 +165,7 @@
 
 [Git 커밋 메시지 컨벤션](https://gist.github.com/stephenparish/9941e89d80e2bc58a153)을 따르는 형식:
 
-```
+```text
 <type>(<scope>): <subject>
 <BLANK LINE>
 <body>
@@ -209,7 +209,7 @@
 - 예: `Closes #123, #245`
 
 **예시:**
-```
+```text
 feat(coinone): add order cancellation API
 
 활성 주문에 대한 새로운 취소 기능을 구현합니다.
@@ -218,7 +218,7 @@ feat(coinone): add order cancellation API
 Closes #123
 ```
 
-```
+```text
 fix(auth): resolve authentication timeout issue
 
 잘못된 타임스탬프 검증으로 인해 인증이 실패하는 문제를 해결합니다.
@@ -227,7 +227,7 @@ fix(auth): resolve authentication timeout issue
 Fixes #456
 ```
 
-```
+```text
 docs(readme): update installation instructions
 
 새로운 Java 21 요구사항을 추가하고 설정 단계를 업데이트합니다.
@@ -284,7 +284,7 @@ GitHub 이슈의 제목은 간결하면서도 명확하게 작성하여 이슈�
 
 #### 효과적인 이슈 생성 가이드
 
-**1. 기능 개발(enhancement) 이슈 작성법**
+### 1. 기능 개발(enhancement) 이슈 작성법
 ```markdown
 ## 📋 개요
 새로운 기능에 대한 간단한 설명
@@ -311,7 +311,7 @@ GitHub 이슈의 제목은 간결하면서도 명확하게 작성하여 이슈�
 관련 문서, 레퍼런스 등
 ```
 
-**2. 버그 수정(bug) 이슈 작성법**
+### 2. 버그 수정(bug) 이슈 작성법
 ```markdown
 ## 📋 버그 요약
 발생한 버그에 대한 간단한 설명
@@ -344,7 +344,7 @@ GitHub 이슈의 제목은 간결하면서도 명확하게 작성하여 이슈�
 - **영향 범위**: 관련 기능 및 사용자 범위
 ```
 
-**3. 리팩토링(refactoring) 이슈 작성법**
+### 3. 리팩토링(refactoring) 이슈 작성법
 ```markdown
 ## 📋 요약
 프로젝트의 현재 상태와 목표하는 리팩토링 내용을 명확히 기술
@@ -371,7 +371,7 @@ GitHub 이슈의 제목은 간결하면서도 명확하게 작성하여 이슈�
 리팩토링으로 얻을 수 있는 구체적인 이점들 설명
 ```
 
-**4. 문서화(documentation) 이슈 작성법**
+### 4. 문서화(documentation) 이슈 작성법
 ```markdown
 ## 📋 요약
 문서화 작업의 범위와 목표를 명확히 기술

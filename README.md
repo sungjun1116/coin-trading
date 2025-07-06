@@ -32,7 +32,7 @@ This project follows **Layered Architecture** principles for maintainability and
     ├── ⚙️ Configuration Layer
     ├── 🚨 Exception Handling
     └── 🔌 Interceptors & Middleware
-```
+```text
 
 ## 🛠️ Technology Stack
 
@@ -41,10 +41,10 @@ This project follows **Layered Architecture** principles for maintainability and
 | **Language** | Java | 21 LTS |
 | **Framework** | Spring Boot | 3.x |
 | **Build Tool** | Gradle | 8.x |
-| **Web Framework** | Spring Web | MVC |
+| **Web Framework** | Spring Web | MVC Framework |
 | **Template Engine** | Thymeleaf | 3.x |
-| **HTTP Client** | HTTP Interface | Declarative |
-| **Real-time** | WebSocket + STOMP | Native |
+| **HTTP Client** | HTTP Interface | Declarative Style |
+| **Real-time** | WebSocket + STOMP | Protocol Support |
 | **Testing** | JUnit 5 + AssertJ | Latest |
 | **Documentation** | JavaDoc | Built-in |
 
@@ -179,10 +179,10 @@ This project implements declarative HTTP clients using **Spring 6 HTTP Interface
 @Component
 @HttpExchange
 public interface CoinoneAccountApiClient {
-    
+
     @PostExchange("/account/balance")
     CoinoneAccountApiResponse getAccount(@RequestBody CoinoneAccountRequest requestBody);
-    
+
     @PostExchange("/account/balance/all")
     CoinoneAccountApiResponse getAccounts(@RequestBody CoinoneAccountRequest requestBody);
 }
@@ -196,7 +196,7 @@ public void getAccountInfo() {
             .accessToken("your-access-token")
             .nonce(UUID.randomUUID().toString())
             .build();
-    
+
     CoinoneAccountApiResponse response = coinoneAccountApiClient.getAccount(request);
     response.getBalances().forEach(balance -> 
         log.info("Currency: {}, Available: {}", 
@@ -211,14 +211,14 @@ public void getAccountInfo() {
 @Component
 @HttpExchange
 public interface BinanceAccountApiClient {
-    
+
     @GetExchange("/api/v3/account")
     BinanceAccountApiResponse getAccount(
         @RequestParam(value = "omitZeroBalances", required = false) boolean omitZeroBalances,
         @RequestParam(value = "recvWindow", required = false) long recvWindow,
         @RequestParam("timestamp") long timestamp
     );
-    
+
     // Default methods for convenience
     default BinanceAccountApiResponse getAccount(long timestamp) {
         return getAccount(false, 5000L, timestamp);
@@ -232,7 +232,7 @@ private BinanceAccountApiClient binanceAccountApiClient;
 public void getAccountInfo() {
     long timestamp = System.currentTimeMillis();
     BinanceAccountApiResponse response = binanceAccountApiClient.getAccount(timestamp);
-    
+
     response.getBalances().forEach(balance -> 
         log.info("Asset: {}, Free: {}, Locked: {}", 
                 balance.getAsset(), balance.getFree(), balance.getLocked())
@@ -305,9 +305,9 @@ The application provides comprehensive logging for:
 We welcome contributions! Please follow these guidelines:
 
 1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/#{Issue ID}amazing-feature`)
+2. **Create** a feature branch (`git checkout -b feature/#{Issue ID}-amazing-feature`)
 3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
-4. **Push** to the branch (`git push origin feature/#{Issue ID}amazing-feature`)
+4. **Push** to the branch (`git push origin feature/#{Issue ID}-amazing-feature`)
 5. **Open** a Pull Request
 
 ### Development Guidelines
