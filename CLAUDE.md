@@ -1,0 +1,501 @@
+# 🚀 알고리즘 트레이딩 플랫폼 - Claude 지침서
+
+## 📋 기술 스택
+
+이 프로젝트는 다음과 같은 기술 스택을 사용합니다:
+
+### 핵심 기술
+- **Java 21 LTS** - 최신 LTS 버전의 Java 언어
+- **Spring Boot 3.x** - 엔터프라이즈급 애플리케이션 프레임워크
+- **Gradle 8.x** - 빌드 자동화 도구
+
+### 주요 의존성
+- **Spring Web** - RESTful 웹 서비스 개발 (HTTP Interface 포함)
+- **Spring Validation** - 데이터 검증 및 바인딩
+- **Spring Actuator** - 애플리케이션 모니터링 및 관리
+- **Lombok** - 코드 간소화 및 보일러플레이트 제거
+
+### 프론트엔드 기술
+- **Thymeleaf 3.x** - 서버 사이드 템플릿 엔진
+  - 자연스러운 템플릿: HTML 파일 자체가 브라우저에서 렌더링 가능
+  - Spring Boot와 완벽한 통합
+  - 국제화(i18n) 지원
+- **Bootstrap 5** - 반응형 CSS 프레임워크
+- **Vanilla JavaScript + ES6+** - 모던 JavaScript 문법 사용
+- **WebSocket + STOMP** - 실시간 통신 프로토콜
+- **Chart.js** - 실시간 차트 라이브러리
+- **ApexCharts** - 고급 차트 및 데이터 시각화
+
+### 개발 도구
+- **Spring Boot DevTools** - 개발 생산성 향상
+- **JUnit 5** - 단위 테스트 프레임워크
+- **AssertJ** - 테스트 어설션 라이브러리
+
+## 🏗️ 프로젝트 구조
+
+```text
+📁 Application Layer
+├── 🎯 Service Layer (비즈니스 로직)
+└── 🏗️ Infrastructure Layer
+    ├── 🌐 Client Layer (외부 API 클라이언트)
+    │   ├── binance/                    # Binance 거래소 통합
+    │   │   ├── request/                # 요청 DTO
+    │   │   └── response/               # 응답 DTO
+    │   └── coinone/                    # Coinone 거래소 통합
+    │       ├── request/                # 요청 DTO
+    │       └── response/               # 응답 DTO
+    ├── ⚙️ Config Layer (설정 및 구성)
+    │   ├── binance/                    # Binance 설정
+    │   └── coinone/                    # Coinone 설정
+    ├── 🚨 Exception Layer (예외 처리)
+    │   ├── binance/                    # Binance 커스텀 예외
+    │   └── coinone/                    # Coinone 커스텀 예외
+    └── 🔌 Interceptor Layer (미들웨어)
+        ├── binance/                    # Binance 인증
+        ├── coinone/                    # Coinone 인증
+        └── common/                     # 공통 인터셉터
+
+🔧 Utility Layer
+└── util/                              # 암호화, 서명 등 유틸리티
+
+🧪 Test Layer
+├── service/                           # 서비스 계층 테스트
+└── infrastructure/                    # 인프라 계층 테스트
+    ├── client/                        # API 클라이언트 테스트
+    └── config/                        # 설정 테스트
+```
+
+### 주요 디렉토리 역할
+
+- **`service/`** - 비즈니스 로직과 도메인 규칙을 포함하는 서비스 계층
+- **`infrastructure/client/`** - 외부 거래소 API와의 통신을 담당하는 클라이언트 계층
+- **`infrastructure/config/`** - Spring 설정, 프로퍼티, REST 클라이언트 구성
+- **`infrastructure/exception/`** - 거래소별 커스텀 예외 처리
+- **`infrastructure/interceptor/`** - 인증, 로깅, 요청/응답 처리 미들웨어
+- **`util/`** - 암호화, 서명, 유틸리티 함수들
+- **`test/`** - 단위 테스트, 통합 테스트, 테스트 지원 클래스들
+
+### 아키텍처 특징
+
+이 프로젝트는 **계층형 아키텍처(Layered Architecture)**를 따라 관심사를 명확히 분리했습니다:
+
+1. **애플리케이션 계층**: 메인 진입점과 애플리케이션 로직
+2. **서비스 계층**: 비즈니스 로직과 도메인 규칙
+3. **인프라스트럭처 계층**: 외부 시스템 통합, 설정, 기술적 관심사
+
+## 📏 코드 스타일 및 규칙
+
+이 프로젝트는 [Spring Framework Code Style](https://github.com/spring-projects/spring-framework/wiki/Code-Style)을 따릅니다:
+
+### 네이밍 규칙
+- **클래스명**: PascalCase (예: `CoinoneService`, `BinanceAccountApiClient`)
+- **메서드명**: camelCase (예: `getAccountInfo`, `placeOrder`)
+- **변수명**: camelCase (예: `accessToken`, `requestBody`)
+- **상수명**: UPPER_SNAKE_CASE (예: `DEFAULT_TIMEOUT`, `MAX_RETRY_COUNT`)
+
+### 코드 구조
+- **패키지 구조**: 계층형 아키텍처를 반영한 패키지 구조
+- **의존성 주입**: `@Autowired` 대신 생성자 주입 사용
+- **예외 처리**: 커스텀 예외 클래스 사용
+- **검증**: Spring Validation 어노테이션 사용
+
+### 문서화
+- **JavaDoc**: public 메서드와 클래스에 대한 문서화
+- **주석**: 복잡한 비즈니스 로직에 대한 설명
+- **README**: 프로젝트 설정 및 사용법 문서화
+
+### 테스트 규칙
+- **단위 테스트**: 모든 public 메서드에 대한 테스트
+- **통합 테스트**: 외부 API 호출에 대한 통합 테스트
+- **테스트 명명**: `should_ReturnExpectedResult_When_GivenCondition` 형식
+
+## 🌳 브랜치 명명 가이드
+
+[AngularJS commit convention](https://gist.github.com/stephenparish/9941e89d80e2bc58a153)을 참고한 브랜치 명명 규칙:
+
+### 브랜치 타입
+- **`main`** - 메인 브랜치 (프로덕션 코드)
+- **`develop`** - 개발 브랜치 (개발 통합)
+- **`feature/`** - 새로운 기능 개발 (docs, test 도 포함)
+- **`bugfix/`** - 버그 수정
+- **`hotfix/`** - 긴급 수정 (프로덕션)
+- **`release/`** - 배포 준비
+
+### 브랜치 명명 규칙
+```text
+{타입}/#{이슈번호}-{간단한-설명}
+```
+
+**예외 정책:**
+- **`hotfix/`** 브랜치의 경우 긴급 상황으로 인해 이슈 번호 없이 진행 가능
+- 긴급 보안 패치, 서비스 중단 상황 등에서 이슈 생성 과정 생략 허용
+- 단, hotfix 완료 후 반드시 사후 문서화 및 이슈 등록 필요
+
+### 예시
+- `feature/#123-add-binance-order-api`
+- `bugfix/#789-fix-authentication-error`
+- `hotfix/critical-security-patch` (이슈번호 생략 허용)
+- `hotfix/#999-emergency-db-fix` (이슈가 있는 경우)
+- `release/v1.2.0`
+
+### 브랜치 작업 플로우
+
+#### 기능 개발 플로우
+1. **브랜치 생성**: `develop` → `feature/#{이슈번호}-{설명}`
+2. **개발 작업**: 기능 구현 및 테스트
+3. **Pull Request**: `feature/#{이슈번호}-{설명}` → `develop`
+4. **코드 리뷰**: 팀원 리뷰 후 승인
+5. **병합 완료**: `develop`에 병합 후 feature 브랜치 삭제
+6. **이슈 자동 종료**: PR 병합 시 연결된 이슈 자동 종료
+
+#### 버그 수정 플로우
+1. **브랜치 생성**: `develop` → `bugfix/#{이슈번호}-{설명}`
+2. **버그 수정**: 문제 해결 및 테스트
+3. **Pull Request**: `bugfix/#{이슈번호}-{설명}` → `develop`
+4. **병합 완료**: 리뷰 후 `develop`에 병합
+5. **이슈 자동 종료**: PR 병합 시 연결된 이슈 자동 종료
+
+#### 배포 플로우
+1. **배포 준비**: `develop` → `release/v{버전}`
+2. **최종 테스트**: 배포 전 통합 테스트
+3. **배포**: `release/v{버전}` → `main`
+4. **백포트**: `main` → `develop` (배포 후 변경사항 반영)
+
+#### 긴급 수정 플로우
+1. **긴급 브랜치**: `main` → `hotfix/{설명}`
+2. **수정 작업**: 긴급 문제 해결
+3. **즉시 배포**: `hotfix/{설명}` → `main`
+4. **백포트**: `hotfix/{설명}` → `develop`
+
+### 커밋 메시지 규칙
+
+[Git 커밋 메시지 컨벤션](https://gist.github.com/stephenparish/9941e89d80e2bc58a153)을 따르는 형식:
+
+```text
+<type>(<scope>): <subject>
+<BLANK LINE>
+<body>
+<BLANK LINE>
+<footer>
+```
+
+**타입 (필수):**
+- `feat`: 새로운 기능 (feature)
+- `fix`: 버그 수정 (bug fix)
+- `docs`: 문서 변경 (documentation)
+- `style`: 코드 포맷팅 (formatting, 세미콜론 누락 등)
+- `refactor`: 코드 리팩토링
+- `test`: 누락된 테스트 추가
+- `chore`: 유지보수 작업
+
+**규칙:**
+- 각 줄은 최대 100자
+- 명령조, 현재시제 사용 ("change" not "changed")
+- 첫 글자는 소문자
+- 제목 끝에 마침표(.) 없음
+- 범위(scope)는 선택사항
+- 본문과 푸터는 선택사항
+
+**언어 규칙:**
+- **제목(subject)**: 영어로 작성
+- **본문(body)**: 한국어로 작성
+- **푸터(footer)**: 영어로 작성 (GitHub 키워드 등)
+
+**범위(Scope):**
+- 변경된 위치나 특정 기능을 명시
+- 예: `auth`, `coinone`, `binance`, `config`
+
+**본문(Body):**
+- 변경 동기 설명
+- 이전 동작과의 차이점 설명
+
+**푸터(Footer):**
+- 중대한 변경사항 참조
+- 관련 이슈 종료
+- 예: `Closes #123, #245`
+
+**예시:**
+```text
+feat(coinone): add order cancellation API
+
+활성 주문에 대한 새로운 취소 기능을 구현합니다.
+즉시 주문 취소 기능과 적절한 오류 처리를 제공합니다.
+
+Closes #123
+```
+
+```text
+fix(auth): resolve authentication timeout issue
+
+잘못된 타임스탬프 검증으로 인해 인증이 실패하는 문제를 해결합니다.
+로컬 시간 대신 서버 시간을 사용하도록 타임스탬프 생성을 조정했습니다.
+
+Fixes #456
+```
+
+```text
+docs(readme): update installation instructions
+
+새로운 Java 21 요구사항을 추가하고 설정 단계를 업데이트합니다.
+
+BREAKING CHANGE: Java 17 is no longer supported, minimum version is Java 21
+```
+
+## 🤖 MCP (Model Context Protocol) 가이드
+
+이 프로젝트에서 Claude Code와 효율적으로 작업하기 위한 MCP 프로토콜 가이드입니다.
+
+### CodeRabbit AI 코드 리뷰 통합
+
+#### 설정 파일: `.coderabbit.yaml`
+- **언어**: 한국어 (`ko-KR`) 리뷰 지원
+- **프로필**: `chill` (적당한 수준의 리뷰)
+- **자동 리뷰**: 활성화 (드래프트 제외)
+- **고수준 요약**: 활성화
+
+#### CodeRabbit 학습 기능 활용
+- **학습 효과**: 비슷한 코드 세그먼트에서 효과적
+- **일반 가이드라인**: [review instructions](https://docs.coderabbit.ai/guides/review-instructions) 설정 권장
+- **학습 관리**: [CodeRabbit 앱](https://app.coderabbit.ai/learnings)에서 관리
+
+#### 리뷰 정책
+- **hotfix 브랜치**: 긴급 상황 시 이슈 번호 생략 허용
+- **사후 문서화**: hotfix 완료 후 반드시 관련 이슈 등록
+- **코드 품질**: 긴급 상황에도 기본적인 코드 리뷰는 유지
+
+### GitHub MCP 활용
+
+#### 이슈 관리
+- **이슈 생성**: 새로운 기능 요청, 버그 리포트, 개선 사항 등을 체계적으로 관리
+- **이슈 검색**: 기존 이슈를 빠르게 찾아 중복 방지
+- **이슈 업데이트**: 진행 상황 업데이트, 라벨 추가, 담당자 지정 등
+
+### 라벨 시스템
+- **`enhancement`**: 새로운 기능 또는 개선사항
+- **`bug`**: 버그 수정
+- **`refactoring`**: 코드 리팩토링
+- **`documentation`**: 문서 관련 작업
+
+#### 이슈 제목 작성 가이드
+
+GitHub 이슈의 제목은 간결하면서도 명확하게 작성하여 이슈의 목적과 내용을 쉽게 파악할 수 있도록 해야 합니다.
+
+**제목 작성 규칙:**
+- **타입 접두사**: `[타입]` 형태로 이슈 종류를 명시
+- **간결성**: 50자 이내로 제한
+- **명확성**: 구체적인 작업 내용 포함
+- **현재시제**: 동사 원형 사용
+
+**타입별 제목 예시:**
+
+**기능 개발 (Feature):**
+- `[FEAT] Binance 선물 거래 API 연동`
+
+**버그 수정 (Bug):**
+- `[BUG] Coinone 인증 토큰 만료 처리 오류`
+
+**리팩토링 (Refactoring):**
+- `[REFACTOR] 계층형 아키텍처 구조 개선`
+
+**문서화 (Documentation):**
+- `[DOCS] API 클라이언트 사용법 문서 추가`
+
+**테스트 (Test):**
+- `[TEST] 거래소 API 통합 테스트 추가`
+
+**기타 (Chore):**
+- `[CHORE] 의존성 업그레이드 (Spring Boot 3.2)`
+
+#### 효과적인 이슈 생성 가이드
+
+### 1. 기능 개발(enhancement) 이슈 작성법
+```markdown
+## 📋 개요
+새로운 기능에 대한 간단한 설명
+
+## 🎯 목적
+이 기능이 왜 필요한지, 어떤 문제를 해결하는지 설명
+
+## 📝 요구사항
+### 기능적 요구사항
+- 요구사항 1
+- 요구사항 2
+
+### 비기능적 요구사항
+- 성능 요구사항
+- 보안 요구사항
+
+## 🔧 구현 방안
+기술적 접근 방법 및 구현 계획
+
+## 🧪 테스트 계획
+테스트 시나리오 및 검증 방법
+
+## 📚 참고사항
+관련 문서, 레퍼런스 등
+```
+
+### 2. 버그 수정(bug) 이슈 작성법
+```markdown
+## 📋 버그 요약
+발생한 버그에 대한 간단한 설명
+
+## 🐛 현상
+### 예상 동작
+정상적으로 동작해야 하는 방식 설명
+
+### 실제 동작
+현재 발생하고 있는 문제 상황 설명
+
+### 재현 단계
+1. 단계 1
+2. 단계 2
+3. 단계 3
+
+## 🔍 원인 분석
+버그 발생 원인에 대한 분석 (가능한 범위에서)
+
+## 🔧 해결 방안
+버그 수정을 위한 구체적인 방법
+
+## 🧪 테스트 계획
+- [ ] 버그 수정 검증
+- [ ] 회귀 테스트
+- [ ] 관련 기능 영향도 확인
+
+## 📊 영향도
+- **심각도**: High/Medium/Low
+- **영향 범위**: 관련 기능 및 사용자 범위
+```
+
+### 3. 리팩토링(refactoring) 이슈 작성법
+```markdown
+## 📋 요약
+프로젝트의 현재 상태와 목표하는 리팩토링 내용을 명확히 기술
+
+## 🎯 목표
+- [ ] 구체적인 개선 목표 1
+- [ ] 구체적인 개선 목표 2
+- [ ] 구체적인 개선 목표 3
+
+## 🔧 변경사항
+### Before/After 구조 비교
+기존 구조와 새로운 구조를 시각적으로 비교
+
+## 🚀 구현 작업
+- [ ] 구체적인 작업 항목 1
+- [ ] 구체적인 작업 항목 2
+- [ ] 구체적인 작업 항목 3
+
+## 🧪 테스트 계획
+- [ ] 테스트 항목 1
+- [ ] 테스트 항목 2
+
+## 📈 개선 효과
+리팩토링으로 얻을 수 있는 구체적인 이점들 설명
+```
+
+### 4. 문서화(documentation) 이슈 작성법
+```markdown
+## 📋 요약
+문서화 작업의 범위와 목표를 명확히 기술
+
+## 🎯 목표
+- [ ] 구체적인 문서화 목표 1
+- [ ] 구체적인 문서화 목표 2
+- [ ] 구체적인 문서화 목표 3
+
+## 🔧 변경사항
+### 새로 추가된 파일
+- **`파일명`** - 파일 설명
+
+### 수정된 파일
+- **`파일명`** - 수정 내용 설명
+
+## 🚀 구현 작업
+- [ ] 구체적인 작업 항목 1
+- [ ] 구체적인 작업 항목 2
+- [ ] 구체적인 작업 항목 3
+
+## 📈 개선 효과
+문서화로 얻을 수 있는 구체적인 이점들 설명
+```
+
+### Pull Request와 이슈 연결 가이드
+
+GitHub에서 PR과 이슈를 연결하여 자동으로 이슈를 종료시키는 방법입니다.
+
+#### PR 제목 및 본문 작성 시 키워드 사용
+PR 제목이나 본문에 다음 키워드를 사용하면 PR이 병합될 때 해당 이슈가 자동으로 종료됩니다:
+
+**종료 키워드:**
+- `Closes #이슈번호`
+- `Fixes #이슈번호`
+- `Resolves #이슈번호`
+
+**예시:**
+```markdown
+feat(coinone): add order cancellation API
+
+활성 주문에 대한 새로운 취소 기능을 구현합니다.
+즉시 주문 취소 기능과 적절한 오류 처리를 제공합니다.
+
+Closes #123
+```
+
+#### 브랜치명과 이슈 연결
+브랜치명에 이슈 번호를 포함하여 추적성을 향상시킵니다:
+- `feature/#123-add-binance-order-api`
+- `bugfix/#789-fix-authentication-error`
+
+#### 여러 이슈 동시 종료
+하나의 PR에서 여러 이슈를 동시에 종료할 수 있습니다:
+```markdown
+Closes #123, #456
+Fixes #789
+```
+
+#### 이슈 연결 확인 방법
+1. PR 생성 후 "Linked issues" 섹션에서 연결된 이슈 확인
+2. 이슈 페이지에서 "Development" 섹션에 연결된 PR 표시 확인
+
+## 📝 문서 작성 언어 가이드
+
+이 프로젝트의 문서 작성 언어는 다음과 같습니다:
+
+### 언어 규칙
+- **한국어**: 대부분의 마크다운 문서(.md)는 한국어로 작성
+- **영어**: README.md 파일만 영어로 작성 (국제적 접근성을 위해)
+
+### 적용 대상
+- **한국어 문서**: CLAUDE.md, docs/ 디렉토리의 모든 마크다운 파일
+- **영어 문서**: README.md (프로젝트 소개, 설치 방법, 사용법 등)
+
+### 작성 가이드
+- 기술 용어는 영어 그대로 사용 (예: API, REST, JSON)
+- 한국어 문서에서도 코드 예시와 명령어는 영어로 작성
+- README.md는 국제 개발자들이 이해할 수 있도록 명확한 영어로 작성
+
+### 문서화 시 필수 포함 사항
+#### PR과 이슈 연결 가이드 포함
+모든 문서화 작업 시 다음 내용을 반드시 포함해야 합니다:
+- PR 제목/본문에 이슈 연결 키워드 사용법
+- 브랜치명과 이슈 번호 연결 방식
+- 자동 이슈 종료 메커니즘 설명
+- 이슈 추적성 향상을 위한 베스트 프랙티스
+
+#### Claude Code 생성 문구 제거
+문서화 작업 시 Claude Code가 자동으로 추가하는 다음 문구들을 항상 제거해야 합니다:
+- `🤖 Generated with [Claude Code](https://claude.ai/code)`
+- `Co-Authored-By: Claude <noreply@anthropic.com>`
+- 기타 Claude 생성 관련 서명이나 워터마크
+
+## 📝 Memory
+
+### 프로젝트 메모리 관리
+이 섹션은 Claude Code의 메모리 시스템을 활용하여 프로젝트 컨텍스트를 유지하고 개발 효율성을 높이기 위한 공간입니다.
+
+#### 메모리 사용법
+- **`#` 단축키**: 빠른 메모리 추가
+- **`/memory` 명령어**: 기존 메모리 편집
+- **`@path/to/import`**: 외부 메모리 파일 임포트

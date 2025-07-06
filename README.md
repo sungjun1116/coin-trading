@@ -16,7 +16,7 @@ A **production-ready** Java cryptocurrency trading platform built with **Layered
 - 🛡️ **Type-Safe Operations**: Comprehensive DTO validation and error handling
 - 🔐 **Secure Authentication**: Automatic request signing with HMAC-SHA algorithms
 - 📊 **Comprehensive Logging**: Request/response tracking with structured logging
-- ⚡ **High Performance**: Async/reactive programming with WebFlux
+- ⚡ **Declarative HTTP Clients**: Interface-based HTTP clients using Spring 6 HTTP Interface
 - 🧪 **Test Coverage**: Extensive unit and integration tests
 - 📚 **Rich Documentation**: Complete JavaDoc and API documentation
 
@@ -32,7 +32,7 @@ This project follows **Layered Architecture** principles for maintainability and
     ├── ⚙️ Configuration Layer
     ├── 🚨 Exception Handling
     └── 🔌 Interceptors & Middleware
-```
+```text
 
 ## 🛠️ Technology Stack
 
@@ -41,7 +41,10 @@ This project follows **Layered Architecture** principles for maintainability and
 | **Language** | Java | 21 LTS |
 | **Framework** | Spring Boot | 3.x |
 | **Build Tool** | Gradle | 8.x |
-| **HTTP Client** | WebFlux | Reactive |
+| **Web Framework** | Spring Web | MVC Framework |
+| **Template Engine** | Thymeleaf | 3.x |
+| **HTTP Client** | HTTP Interface | Declarative Style |
+| **Real-time** | WebSocket + STOMP | Protocol Support |
 | **Testing** | JUnit 5 + AssertJ | Latest |
 | **Documentation** | JavaDoc | Built-in |
 
@@ -166,57 +169,84 @@ public void getMarketData() {
 }
 ```
 
-### 🌐 Direct API Client Usage
+### 🌐 Declarative HTTP Interface Clients
 
-#### Coinone API
+This project implements declarative HTTP clients using **Spring 6 HTTP Interface**:
+
+#### Coinone API (HTTP Interface)
 
 ```java
+@Component
+@HttpExchange
+public interface CoinoneAccountApiClient {
+
+    @PostExchange("/account/balance")
+    CoinoneAccountApiResponse getAccount(@RequestBody CoinoneAccountRequest requestBody);
+
+    @PostExchange("/account/balance/all")
+    CoinoneAccountApiResponse getAccounts(@RequestBody CoinoneAccountRequest requestBody);
+}
+
+// Usage
 @Autowired
 private CoinoneAccountApiClient coinoneAccountApiClient;
 
-@Autowired 
-private CoinoneTickerApiClient coinoneTickerApiClient;
-
-// Account information
 public void getAccountInfo() {
     CoinoneAccountRequest request = CoinoneAccountRequest.builder()
             .accessToken("your-access-token")
             .nonce(UUID.randomUUID().toString())
             .build();
-    
+
     CoinoneAccountApiResponse response = coinoneAccountApiClient.getAccount(request);
     response.getBalances().forEach(balance -> 
         log.info("Currency: {}, Available: {}", 
                 balance.getCurrency(), balance.getAvailable())
     );
 }
-
-// Market data
-public void getTickerInfo() {
-    CoinoneTickerApiResponse response = coinoneTickerApiClient.getTicker("KRW", "BTC");
-    CoinoneTicker ticker = response.getTicker();
-    log.info("BTC Price: {} KRW", ticker.getLast());
-}
 ```
 
-#### Binance API
+#### Binance API (HTTP Interface)
 
 ```java
+@Component
+@HttpExchange
+public interface BinanceAccountApiClient {
+
+    @GetExchange("/api/v3/account")
+    BinanceAccountApiResponse getAccount(
+        @RequestParam(value = "omitZeroBalances", required = false) boolean omitZeroBalances,
+        @RequestParam(value = "recvWindow", required = false) long recvWindow,
+        @RequestParam("timestamp") long timestamp
+    );
+
+    // Default methods for convenience
+    default BinanceAccountApiResponse getAccount(long timestamp) {
+        return getAccount(false, 5000L, timestamp);
+    }
+}
+
+// Usage
 @Autowired
 private BinanceAccountApiClient binanceAccountApiClient;
 
 public void getAccountInfo() {
     long timestamp = System.currentTimeMillis();
-    BinanceAccountApiResponse response = binanceAccountApiClient.getAccount(
-        false, 5000L, timestamp
-    );
-    
+    BinanceAccountApiResponse response = binanceAccountApiClient.getAccount(timestamp);
+
     response.getBalances().forEach(balance -> 
         log.info("Asset: {}, Free: {}, Locked: {}", 
                 balance.getAsset(), balance.getFree(), balance.getLocked())
     );
 }
 ```
+
+### 🔧 HTTP Interface Benefits
+
+- **Declarative Approach**: Automatic implementation generation from interface definitions
+- **Type Safety**: Compile-time type verification
+- **Boilerplate Reduction**: Minimal repetitive HTTP client code
+- **WebClient Based**: High performance guaranteed through internal WebClient usage
+- **Spring Integration**: Perfect integration with Spring ecosystem
 
 ## 🔐 Security Features
 
@@ -275,9 +305,9 @@ The application provides comprehensive logging for:
 We welcome contributions! Please follow these guidelines:
 
 1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+2. **Create** a feature branch (`git checkout -b feature/#{Issue ID}-amazing-feature`)
 3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
-4. **Push** to the branch (`git push origin feature/amazing-feature`)
+4. **Push** to the branch (`git push origin feature/#{Issue ID}-amazing-feature`)
 5. **Open** a Pull Request
 
 ### Development Guidelines
@@ -305,13 +335,6 @@ We welcome contributions! Please follow these guidelines:
 - Rate limiting not implemented (planned for v2.0)
 - WebSocket streaming not supported (planned for v2.0)
 - Limited to spot trading (futures trading planned)
-
-## 🗺️ Roadmap
-
-- [ ] **v2.0**: WebSocket real-time data streaming
-- [ ] **v2.1**: Rate limiting and circuit breaker patterns
-- [ ] **v2.2**: Futures trading support
-- [ ] **v3.0**: Additional exchange integrations (Upbit, Bithumb)
 
 ## 📄 License
 
