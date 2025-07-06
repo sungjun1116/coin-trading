@@ -55,3 +55,43 @@
 2. **수정 작업**: 긴급 문제 해결
 3. **즉시 배포**: `hotfix/{설명}` → `main`
 4. **백포트**: `hotfix/{설명}` → `develop`
+
+### PR-이슈 연결
+
+GitHub에서 PR과 이슈를 연결하여 PR 병합 시 자동으로 이슈를 종료시킬 수 있습니다.
+
+#### 자동 종료 키워드
+PR 제목이나 본문에 다음 키워드를 사용하면 PR이 병합될 때 해당 이슈가 자동으로 종료됩니다:
+
+- `Closes #이슈번호`
+- `Fixes #이슈번호`
+- `Resolves #이슈번호`
+
+#### 여러 이슈 동시 종료
+하나의 PR에서 여러 이슈를 동시에 종료할 수 있습니다:
+
+```markdown
+feat(coinone): add comprehensive order management system
+
+주문 생성, 취소, 수정 기능을 포함한 통합 주문 관리 시스템을 구현합니다.
+사용자 경험 개선과 시스템 안정성을 향상시킵니다.
+
+Closes #123, #456, #789
+Fixes #101
+```
+
+#### 사용 예시
+```markdown
+# PR 제목
+fix(auth): resolve authentication timeout and token refresh issues
+
+# PR 본문  
+잘못된 타임스탬프 검증과 토큰 갱신 로직의 문제를 해결합니다.
+- 로컬 시간 대신 서버 시간 사용
+- 토큰 만료 시 자동 갱신 기능 추가
+- 인증 실패 시 적절한 에러 메시지 표시
+
+Closes #456
+Fixes #789
+Resolves #101
+```
