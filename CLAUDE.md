@@ -126,10 +126,16 @@
 {타입}/#{이슈번호}-{간단한-설명}
 ```
 
+**예외 정책:**
+- **`hotfix/`** 브랜치의 경우 긴급 상황으로 인해 이슈 번호 없이 진행 가능
+- 긴급 보안 패치, 서비스 중단 상황 등에서 이슈 생성 과정 생략 허용
+- 단, hotfix 완료 후 반드시 사후 문서화 및 이슈 등록 필요
+
 ### 예시
 - `feature/#123-add-binance-order-api`
 - `bugfix/#789-fix-authentication-error`
-- `hotfix/critical-security-patch`
+- `hotfix/critical-security-patch` (이슈번호 생략 허용)
+- `hotfix/#999-emergency-db-fix` (이슈가 있는 경우)
 - `release/v1.2.0`
 
 ### 브랜치 작업 플로우
@@ -238,6 +244,24 @@ BREAKING CHANGE: Java 17 is no longer supported, minimum version is Java 21
 ## 🤖 MCP (Model Context Protocol) 가이드
 
 이 프로젝트에서 Claude Code와 효율적으로 작업하기 위한 MCP 프로토콜 가이드입니다.
+
+### CodeRabbit AI 코드 리뷰 통합
+
+#### 설정 파일: `.coderabbit.yaml`
+- **언어**: 한국어 (`ko-KR`) 리뷰 지원
+- **프로필**: `chill` (적당한 수준의 리뷰)
+- **자동 리뷰**: 활성화 (드래프트 제외)
+- **고수준 요약**: 활성화
+
+#### CodeRabbit 학습 기능 활용
+- **학습 효과**: 비슷한 코드 세그먼트에서 효과적
+- **일반 가이드라인**: [review instructions](https://docs.coderabbit.ai/guides/review-instructions) 설정 권장
+- **학습 관리**: [CodeRabbit 앱](https://app.coderabbit.ai/learnings)에서 관리
+
+#### 리뷰 정책
+- **hotfix 브랜치**: 긴급 상황 시 이슈 번호 생략 허용
+- **사후 문서화**: hotfix 완료 후 반드시 관련 이슈 등록
+- **코드 품질**: 긴급 상황에도 기본적인 코드 리뷰는 유지
 
 ### GitHub MCP 활용
 
