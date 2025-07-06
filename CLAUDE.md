@@ -466,3 +466,12 @@ Fixes #789
 - `Co-Authored-By: Claude <noreply@anthropic.com>`
 - 기타 Claude 생성 관련 서명이나 워터마크
 
+## 📝 Memory
+
+### 프로젝트 메모리 관리
+이 섹션은 Claude Code의 메모리 시스템을 활용하여 프로젝트 컨텍스트를 유지하고 개발 효율성을 높이기 위한 공간입니다.
+
+#### 메모리 사용법
+- **`#` 단축키**: 빠른 메모리 추가
+- **`/memory` 명령어**: 기존 메모리 편집
+- **`@path/to/import`**: 외부 메모리 파일 임포트
