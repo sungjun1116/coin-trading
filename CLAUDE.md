@@ -140,12 +140,14 @@
 3. **Pull Request**: `feature/#{이슈번호}-{설명}` → `develop`
 4. **코드 리뷰**: 팀원 리뷰 후 승인
 5. **병합 완료**: `develop`에 병합 후 feature 브랜치 삭제
+6. **이슈 자동 종료**: PR 병합 시 연결된 이슈 자동 종료
 
 #### 버그 수정 플로우
 1. **브랜치 생성**: `develop` → `bugfix/#{이슈번호}-{설명}`
 2. **버그 수정**: 문제 해결 및 테스트
 3. **Pull Request**: `bugfix/#{이슈번호}-{설명}` → `develop`
 4. **병합 완료**: 리뷰 후 `develop`에 병합
+5. **이슈 자동 종료**: PR 병합 시 연결된 이슈 자동 종료
 
 #### 배포 플로우
 1. **배포 준비**: `develop` → `release/v{버전}`
@@ -188,6 +190,11 @@
 - 범위(scope)는 선택사항
 - 본문과 푸터는 선택사항
 
+**언어 규칙:**
+- **제목(subject)**: 영어로 작성
+- **본문(body)**: 한국어로 작성
+- **푸터(footer)**: 영어로 작성 (GitHub 키워드 등)
+
 **범위(Scope):**
 - 변경된 위치나 특정 기능을 명시
 - 예: `auth`, `coinone`, `binance`, `config`
@@ -205,8 +212,8 @@
 ```
 feat(coinone): add order cancellation API
 
-Implement new cancellation functionality for active orders.
-Provides immediate order cancellation with proper error handling.
+활성 주문에 대한 새로운 취소 기능을 구현합니다.
+즉시 주문 취소 기능과 적절한 오류 처리를 제공합니다.
 
 Closes #123
 ```
@@ -214,8 +221,8 @@ Closes #123
 ```
 fix(auth): resolve authentication timeout issue
 
-The authentication was failing due to incorrect timestamp validation.
-Adjusted timestamp generation to use server time instead of local time.
+잘못된 타임스탬프 검증으로 인해 인증이 실패하는 문제를 해결합니다.
+로컬 시간 대신 서버 시간을 사용하도록 타임스탬프 생성을 조정했습니다.
 
 Fixes #456
 ```
@@ -223,7 +230,7 @@ Fixes #456
 ```
 docs(readme): update installation instructions
 
-Add new Java 21 requirement and update setup steps.
+새로운 Java 21 요구사항을 추가하고 설정 단계를 업데이트합니다.
 
 BREAKING CHANGE: Java 17 is no longer supported, minimum version is Java 21
 ```
@@ -390,6 +397,44 @@ GitHub 이슈의 제목은 간결하면서도 명확하게 작성하여 이슈�
 문서화로 얻을 수 있는 구체적인 이점들 설명
 ```
 
+### Pull Request와 이슈 연결 가이드
+
+GitHub에서 PR과 이슈를 연결하여 자동으로 이슈를 종료시키는 방법입니다.
+
+#### PR 제목 및 본문 작성 시 키워드 사용
+PR 제목이나 본문에 다음 키워드를 사용하면 PR이 병합될 때 해당 이슈가 자동으로 종료됩니다:
+
+**종료 키워드:**
+- `Closes #이슈번호`
+- `Fixes #이슈번호`
+- `Resolves #이슈번호`
+
+**예시:**
+```markdown
+feat(coinone): add order cancellation API
+
+활성 주문에 대한 새로운 취소 기능을 구현합니다.
+즉시 주문 취소 기능과 적절한 오류 처리를 제공합니다.
+
+Closes #123
+```
+
+#### 브랜치명과 이슈 연결
+브랜치명에 이슈 번호를 포함하여 추적성을 향상시킵니다:
+- `feature/#123-add-binance-order-api`
+- `bugfix/#789-fix-authentication-error`
+
+#### 여러 이슈 동시 종료
+하나의 PR에서 여러 이슈를 동시에 종료할 수 있습니다:
+```markdown
+Closes #123, #456
+Fixes #789
+```
+
+#### 이슈 연결 확인 방법
+1. PR 생성 후 "Linked issues" 섹션에서 연결된 이슈 확인
+2. 이슈 페이지에서 "Development" 섹션에 연결된 PR 표시 확인
+
 ## 📝 문서 작성 언어 가이드
 
 이 프로젝트의 문서 작성 언어는 다음과 같습니다:
@@ -406,4 +451,18 @@ GitHub 이슈의 제목은 간결하면서도 명확하게 작성하여 이슈�
 - 기술 용어는 영어 그대로 사용 (예: API, REST, JSON)
 - 한국어 문서에서도 코드 예시와 명령어는 영어로 작성
 - README.md는 국제 개발자들이 이해할 수 있도록 명확한 영어로 작성
+
+### 문서화 시 필수 포함 사항
+#### PR과 이슈 연결 가이드 포함
+모든 문서화 작업 시 다음 내용을 반드시 포함해야 합니다:
+- PR 제목/본문에 이슈 연결 키워드 사용법
+- 브랜치명과 이슈 번호 연결 방식
+- 자동 이슈 종료 메커니즘 설명
+- 이슈 추적성 향상을 위한 베스트 프랙티스
+
+#### Claude Code 생성 문구 제거
+문서화 작업 시 Claude Code가 자동으로 추가하는 다음 문구들을 항상 제거해야 합니다:
+- `🤖 Generated with [Claude Code](https://claude.ai/code)`
+- `Co-Authored-By: Claude <noreply@anthropic.com>`
+- 기타 Claude 생성 관련 서명이나 워터마크
 
