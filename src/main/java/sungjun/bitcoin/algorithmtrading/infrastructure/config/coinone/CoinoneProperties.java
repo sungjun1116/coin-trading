@@ -76,13 +76,13 @@ public class CoinoneProperties {
      * HTTP 연결 타임아웃 (초 단위)
      */
     @NotNull(message = "연결 타임아웃은 필수 값입니다.")
-    private Long connectionTimeout;
+    private Integer connectionTimeout;
 
     /**
      * HTTP 읽기 타임아웃 (초 단위)
      */
     @NotNull(message = "읽기 타임아웃은 필수 값입니다.")
-    private Long readTimeout;
+    private Integer readTimeout;
 
     /**
      * 서명 생성에 사용할 알고리즘 (예: HmacSHA512)
@@ -102,7 +102,7 @@ public class CoinoneProperties {
      * @param signatureAlgorithm the algorithm name used for signature generation (e.g., "HmacSHA512")
      */
     @ConstructorBinding
-    public CoinoneProperties(String publicUrl, String privateUrl, String accessToken, String secretKey, Long connectionTimeout, Long readTimeout, String signatureAlgorithm) {
+    public CoinoneProperties(String publicUrl, String privateUrl, String accessToken, String secretKey, Integer connectionTimeout, Integer readTimeout, String signatureAlgorithm) {
         this.publicUrl = publicUrl;
         this.privateUrl = privateUrl;
         this.accessToken = accessToken;
