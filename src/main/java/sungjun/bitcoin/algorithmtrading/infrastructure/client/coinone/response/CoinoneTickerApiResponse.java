@@ -2,11 +2,13 @@ package sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.response;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.CoinoneTicker;
 
 import java.util.List;
 
 @Getter
+@NoArgsConstructor
 public class CoinoneTickerApiResponse extends CoinoneBaseApiResponse {
 
     private String serverTime;

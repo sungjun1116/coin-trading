@@ -1,6 +1,5 @@
 package sungjun.bitcoin.algorithmtrading.infrastructure.config.binance;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.http.client.ClientHttpRequestFactoryBuilder;
@@ -14,6 +13,7 @@ import org.springframework.web.client.RestClient;
 import org.springframework.web.client.support.RestClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.binance.BinanceAccountApiClient;
+import sungjun.bitcoin.algorithmtrading.infrastructure.client.binance.BinanceTickerApiClient;
 import sungjun.bitcoin.algorithmtrading.infrastructure.interceptor.binance.BinanceAuthenticationInterceptor;
 import sungjun.bitcoin.algorithmtrading.infrastructure.interceptor.common.LoggingInterceptor;
 
@@ -49,6 +49,21 @@ public class BinanceRestClientConfig {
         return createHttpServiceProxy(restClient, BinanceAccountApiClient.class);
     }
 
+    @Bean
+    public BinanceTickerApiClient binanceTickerApiClient(RestClient.Builder builder) {
+        RestClient restClient = builder
+            .baseUrl(properties.getUrl())
+            .requestFactory(createPublicClientHttpRequestFactory())
+            .defaultHeaders(this::setDefaultHeaders)
+            .requestInterceptors(interceptors -> {
+                interceptors.add(loggingInterceptor);
+            })
+            .defaultStatusHandler(responseErrorHandler)
+            .build();
+
+        return createHttpServiceProxy(restClient, BinanceTickerApiClient.class);
+    }
+
     private ClientHttpRequestFactory createClientHttpRequestFactory() {
         ClientHttpRequestFactorySettings factorySettings = ClientHttpRequestFactorySettings
             .defaults()
@@ -57,6 +72,16 @@ public class BinanceRestClientConfig {
 
         ClientHttpRequestFactory factory = ClientHttpRequestFactoryBuilder.detect().build(factorySettings);
         return new BufferingClientHttpRequestFactory(new BinanceSignedClientHttpRequestFactory(properties, factory));
+    }
+
+    private ClientHttpRequestFactory createPublicClientHttpRequestFactory() {
+        ClientHttpRequestFactorySettings factorySettings = ClientHttpRequestFactorySettings
+            .defaults()
+            .withConnectTimeout(Duration.ofSeconds(properties.getConnectionTimeout()))
+            .withReadTimeout(Duration.ofSeconds(properties.getReadTimeout()));
+
+        ClientHttpRequestFactory factory = ClientHttpRequestFactoryBuilder.detect().build(factorySettings);
+        return new BufferingClientHttpRequestFactory(factory);
     }
 
     private void setDefaultHeaders(HttpHeaders headers) {

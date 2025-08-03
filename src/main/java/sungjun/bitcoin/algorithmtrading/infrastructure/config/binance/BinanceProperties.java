@@ -59,13 +59,13 @@ public class BinanceProperties {
      * HTTP 연결 타임아웃 (초 단위)
      */
     @NotNull(message = "연결 타임아웃은 필수 값입니다.")
-    private Long connectionTimeout;
+    private Integer connectionTimeout;
 
     /**
      * HTTP 읽기 타임아웃 (초 단위)
      */
     @NotNull(message = "읽기 타임아웃은 필수 값입니다.")
-    private Long readTimeout;
+    private Integer readTimeout;
 
     /**
      * 서명 생성에 사용할 알고리즘 (예: HmacSHA256)
@@ -84,7 +84,7 @@ public class BinanceProperties {
      * @param signatureAlgorithm the algorithm used for signature generation (e.g., HmacSHA256)
      */
     @ConstructorBinding
-    public BinanceProperties(String url, String accessToken, String secretKey, Long connectionTimeout, Long readTimeout, String signatureAlgorithm) {
+    public BinanceProperties(String url, String accessToken, String secretKey, Integer connectionTimeout, Integer readTimeout, String signatureAlgorithm) {
         this.url = url;
         this.accessToken = accessToken;
         this.secretKey = secretKey;

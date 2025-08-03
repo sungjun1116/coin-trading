@@ -21,7 +21,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public final class CoinoneTicker {
+public class CoinoneTicker {
     private String quoteCurrency;
     private String targetCurrency;
     private int timeStamp;
@@ -88,7 +88,7 @@ public final class CoinoneTicker {
      */
     @Getter
     @NoArgsConstructor
-    static class BestOrderBook {
+    public static class BestOrderBook {
         /**
          * 호가 가격 (문자열 형태)
          */

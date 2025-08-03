@@ -6,8 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.IntegrationClientTestSupport;
-import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.CoinoneOrderApiClient;
-import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.OrderSide;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.request.CoinoneOrderCancelRequest;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.request.CoinoneOrderRequest;
 import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.response.CoinoneOrderApiResponse;
@@ -27,7 +25,7 @@ class CoinoneOrderApiClientTest extends IntegrationClientTestSupport {
 
     @AfterEach
     void tearDown() {
-        // coinoneOrderApiClient.cancelAll(createOrderCancelRequest());
+        // Cleanup logic can be added here if needed
     }
 
     @DisplayName("시장가 매도 주문을 체결한다.")
@@ -60,7 +58,7 @@ class CoinoneOrderApiClientTest extends IntegrationClientTestSupport {
 
 
     @DisplayName("지정가 매도 주문을 체결한다.")
-    // @Disabled
+    @Disabled
     @Test
     void limitSellOrder() {
         // given
@@ -97,7 +95,7 @@ class CoinoneOrderApiClientTest extends IntegrationClientTestSupport {
         OrderSide side = OrderSide.BUY;
         String quoteCurrency = "KRW";
         String targetCurrency = "TRX";
-        String amount = "1996002";
+        String amount = "1996000";
 
         CoinoneOrderRequest limitOrderRequest = CoinoneOrderRequest.createMarketBuyOrder(accessToken,
             nonce,
@@ -124,8 +122,8 @@ class CoinoneOrderApiClientTest extends IntegrationClientTestSupport {
         OrderSide side = OrderSide.BUY;
         String quoteCurrency = "KRW";
         String targetCurrency = "TRX";
-        String price = "349.6";
-        String qty = "2864.98194143";
+        String price = "427.1";
+        String qty = "4672.30534927";
 
         CoinoneOrderRequest limitOrderRequest = CoinoneOrderRequest.createLimitOrder(accessToken,
             nonce,

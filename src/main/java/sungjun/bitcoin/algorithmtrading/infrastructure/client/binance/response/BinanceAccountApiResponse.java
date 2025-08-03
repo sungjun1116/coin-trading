@@ -2,6 +2,7 @@ package sungjun.bitcoin.algorithmtrading.infrastructure.client.binance.response;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Singular;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class BinanceAccountApiResponse {
     private boolean preventSor;
     private Long updateTime;
     private String accountType;
+    @Singular
     private List<BinanceBalance> balances;
     private List<String> permissions;
     

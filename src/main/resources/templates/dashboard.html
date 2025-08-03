@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+      th:replace="~{layout :: layout(~{::content})}">
+<head>
+    <title th:text="${title}">대시보드</title>
+</head>
+<body>
+    <div th:fragment="content">
+        <!-- Dashboard Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="display-4">
+                    <i class="fas fa-tachometer-alt me-3"></i>
+                    실시간 대시보드
+                </h1>
+                <p class="lead text-muted">여러 거래소의 암호화폐 시세를 한눈에 확인하세요</p>
+            </div>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="row mb-4">
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    BTC/KRW (Coinone)
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="btc-krw-price">
+                                    로딩 중...
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-bitcoin fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                    ETH/KRW (Coinone)
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="eth-krw-price">
+                                    로딩 중...
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fab fa-ethereum fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                    BTC/USDT (Binance)
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="btc-usdt-price">
+                                    로딩 중...
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-warning shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                    ETH/USDT (Binance)
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800" id="eth-usdt-price">
+                                    로딩 중...
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-chart-bar fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="row">
+            
+
+            
+        </div>
+
+        <!-- Market Data Table -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">시장 데이터</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="marketDataTable">
+                                <thead>
+                                    <tr>
+                                        <th>거래소</th>
+                                        <th>심볼</th>
+                                        <th>현재가</th>
+                                        <th>24h 변동률</th>
+                                        <th>24h 고가</th>
+                                        <th>24h 저가</th>
+                                        <th>거래량</th>
+                                        <th>업데이트</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="marketDataBody">
+                                    <tr>
+                                        <td colspan="8" class="text-center">데이터 로딩 중...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
