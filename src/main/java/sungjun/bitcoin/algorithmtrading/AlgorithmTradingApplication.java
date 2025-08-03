@@ -2,6 +2,7 @@ package sungjun.bitcoin.algorithmtrading;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * 알고리즘 트레이딩 애플리케이션의 메인 클래스입니다.
@@ -24,6 +25,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 1.0
  */
 @SpringBootApplication
+@EnableScheduling
 public class AlgorithmTradingApplication {
 
     /**

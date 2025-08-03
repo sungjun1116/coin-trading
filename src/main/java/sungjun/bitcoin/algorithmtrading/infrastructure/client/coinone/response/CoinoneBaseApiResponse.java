@@ -29,6 +29,12 @@ public abstract class CoinoneBaseApiResponse {
     protected String errorCode;
 
     /**
+     * Default constructor for JSON deserialization.
+     */
+    protected CoinoneBaseApiResponse() {
+    }
+
+    /**
      * Initializes a CoinoneBaseApiResponse with the specified API result and error code.
      *
      * @param result    the result of the API call, typically "success" or "error"

@@ -21,12 +21,12 @@ import sungjun.bitcoin.algorithmtrading.infrastructure.client.coinone.response.C
 public interface CoinoneTickerApiClient {
 
     /**
-     * Retrieves real-time ticker information for the specified currency pair from the Coinone exchange.
+     * 지정된 통화 쌍에 대한 실시간 시세 정보를 Coinone 거래소에서 조회합니다.
      *
-     * @param quoteCurrency the base currency code (e.g., KRW)
-     * @param targetCurrency the target cryptocurrency code (e.g., BTC)
-     * @return the ticker data for the given currency pair
-     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException if the API call fails
+     * @param quoteCurrency 기준 통화 코드 (예: KRW)
+     * @param targetCurrency 대상 암호화폐 코드 (예: BTC)
+     * @return 주어진 통화 쌍의 시세 데이터
+     * @throws sungjun.bitcoin.algorithmtrading.infrastructure.exception.coinone.CoinoneApiException API 호출 실패 시 발생
      */
     @GetExchange("/ticker_new/{quoteCurrency}/{targetCurrency}")
     CoinoneTickerApiResponse getTicker(@PathVariable String quoteCurrency, @PathVariable String targetCurrency);
